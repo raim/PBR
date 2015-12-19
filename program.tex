@@ -1,0 +1,124 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{hyperref}
+
+\parskip 0.3 cm
+\parindent 0 cm
+
+\begin{document}
+
+\section{PBR Hackaton Projects}
+\label{proj}
+
+\subsection{Gasometer (Gas Flux)}
+\label{gas}
+
+Extend the exisiting setup (co2meter+arduino+screen): 
+
+Sensor calibration routine via touch-screen (use PSI gas mixing system) 
+
+Add Aalborg mass flow meter (arduino hardware serial Tx3,Rx3) and/or 
+
+Valve control to measure several reactors (arduino software serial
+connections), perhaps attach to PSI Multicultivator
+
+\subsection{Spectrometer (Light Flux)} 
+\label{spec}
+
+Simple measuring tool: AvaSpec-Mini2048l-U25 + arduino or raspi
+
+Advanced: with LED for absorbance, reflectance, or fluorescence,
+built light paths and perhaps a reactor probe for online recording
+
+\subsection{Continuous Culture (Liquid Flux)} 
+\label{cult}
+
+Balance and peristaltic pumps + arduino
+
+Build simple reactor with gassing system measured by \ref{gas}
+
+Perhaps combine with \ref{spec} to make turbidostatic control
+
+\subsection{Microfluidics Device (Single Cell Biology)} 
+\label{micro}
+
+Scratch microscope slide + 2-3 pumps + arduino/screen
+
+Connect to Ilka's lab microscope
+
+
+\newpage
+
+\section{Program}
+
+\subsection{Day 1 $<$12:00 : Building Bioreactors}
+
+Talks, 30-60 min:
+
+\subsubsection{Rob's DIY Reactor - the beginnings}
+\subsubsection{Dougie's DIY Reactor - 20 yrs later}
+\subsubsection{Avantes - Spectrometry}
+
+Spectrometry applications, incl. NIR for metabolite measurements and OD
+
+Software interface to Avantes spectrometers
+
+\subsubsection{CellDeg - Optimizing Photosynthetic Growth}
+
+Introduction to CellDeg's 2.5 k algal growth setup (overnight 30 g/L
+cyano biomass)
+
+\subsection{Day 1 $>$13:00 : Hackathon I}
+
+Introduction to the gasometer: connecting sensors with Arduino,
+making an autonomous measurement device via Sainsmart's Touch Screen
+
+Introduction to Rob's reactor: complete setup for photosynthetic growth
+
+Self-organizing into teams: lab hardware (tubing etc.), control hardware
+(soldering etc.), software
+
+\subsection{Day 2 $<$12:00 : Photobioreactors in Research}
+
+Talks, 30-60 min:
+
+Nir Keren, Hellingwerf, Jan Cerveny, Dougie Murray,
+something microfluidics?
+
+\subsection{Day 2 $>$13:00 : Hackathon II}
+
+Perhaps in teams, either by projects (\ref{gas}--\ref{micro}) or in
+software vs. hardware (soldering/tubing) vs. biolab (cell cultures),
+or -- most likely -- in dynamic self-organisation, working parallel on
+all projects.
+
+\subsubsection{Hardware I} 
+soldering, tubing
+
+\subsubsection{Software I} 
+probe/sensor/pump $\Leftrightarrow$ arduino/raspi interfaces
+
+\subsection{Day 3 $<$12:00 : Hackathon III}
+
+\subsubsection{Hardware II} 
+Visit HHU's fine mechanics and glas blower work-shops, place orders
+
+Integrate projects \ref{gas},\ref{spec}\&\ref{cult} into a simple DIY
+reactor and/or with PSI FMT150 or Multicultivator
+
+Integrate project \ref{micro} with the simple microscope in Ilka's lab,
+or a more advanced system (CAi?)
+
+\subsection{Day 3 $>$13:00 : Consolidating}
+
+\subsubsection{Software II}
+arduino/raspi $\Leftrightarrow$  master/server interface
+
+Standard formats and interfaces
+
+Brain storming: relation of data and models
+
+Beer: relation of data and models and beer
+
+
+\end{document}
