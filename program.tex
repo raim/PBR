@@ -1,11 +1,12 @@
 \documentclass[12pt,a4paper]{article}
 
 \usepackage{hyperref}
+\usepackage{url}
 
 \parskip 0.3 cm
 \parindent 0 cm
 
-\title{QTB PBR Hackathon}
+\title{QTB PBR Hack`a'thing}
 \date{March 2--4, 2016}
 \begin{document}
 \maketitle
@@ -14,25 +15,25 @@
 \normalsize
 \newpage
 
-\section{PBR Hackathon Projects}
+\section{PBR Hack`a'thing Projects}
 \label{proj}
 
 \subsection{Gasometer (Gas Flux)}
 \label{gas}
 
-Extend the exisiting setup (co2meter+arduino+screen): 
+Extend the existing setup (co2meter+arduino+screen): 
 
 Sensor calibration routine via touch-screen (use PSI gas mixing system) 
 
-Add Aalborg mass flow meter (arduino hardware serial Tx3,Rx3) and/or 
+Add Aalborg mass flow meter (arduino hardware serial Tx3,Rx3)  
 
-Valve control to measure several reactors (arduino software serial
+Add valve control to measure several reactors (arduino software serial
 connections), perhaps attach to PSI Multicultivator
 
 \subsection{Spectrometer (Light Flux)} 
 \label{spec}
 
-Simple measuring tool: AvaSpec-Mini2048l-U25 + arduino or raspi
+Simple measuring tool: \href{http://www.avantes.com/products/spectrometers/compactline/item/723-avaspec-mini}{AvaSpec-Mini2048l-U25} + arduino or raspi
 
 Advanced: with LED for absorbance, reflectance, or fluorescence,
 built light paths and perhaps a reactor probe for online recording
@@ -40,7 +41,7 @@ built light paths and perhaps a reactor probe for online recording
 \subsection{Continuous Culture (Liquid Flux)} 
 \label{cult}
 
-Balance and peristaltic pumps + arduino
+Balance (e.g. Mettler Toledo \href{http://de.mt.com/de/de/home/products/Industrial_Weighing_Solutions/bench-scales/weighing-platforms/high-resolution/PBK785.html}{PBK785-3XS/f}) and peristaltic pumps + arduino
 
 Build simple reactor with gassing system measured by \ref{gas}
 
@@ -62,11 +63,11 @@ Connect to Ilka's lab microscope
 
 Talks, 30-60 min:
 
-\subsubsection{Rob's DIY Reactor - The beginnings}
+\subsubsection{Rob's DIY Reactor - The Beginnings}
 
 The Captor - Arduino-controlled mini PBR
 
-\subsubsection{Dougie's DIY Reactor - 20 yrs later}
+\subsubsection{Dougie's DIY Reactor - 20 yrs Later}
 \subsubsection{Avantes - Spectrometry}
 
 Spectrometry applications, incl. NIR for metabolite measurements and OD
@@ -78,7 +79,7 @@ Software interface to Avantes spectrometers
 Introduction to CellDeg's 2.5 k Euro algal growth setup (overnight 30 g/L
 cyano biomass)
 
-\subsection{Day 1 $>$13:00 : Hackathon I}
+\subsection{Day 1 $>$13:00 : Hack`a'thing I}
 
 Introduction to the gasometer: connecting sensors with Arduino,
 making an autonomous measurement device via Sainsmart's Touch Screen
@@ -95,7 +96,7 @@ Talks, 30-60 min:
 Nir Keren, Hellingwerf, Jan Cerveny, Dougie Murray,
 something microfluidics?
 
-\subsection{Day 2 $>$13:00 : Hackathon II}
+\subsection{Day 2 $>$13:00 : Hack`a'thing II}
 
 Perhaps in teams, either by projects (\ref{gas}--\ref{micro}) or in
 software vs. hardware (soldering/tubing) vs. biolab (cell cultures),
@@ -108,7 +109,7 @@ soldering, tubing
 \subsubsection{Software I} 
 probe/sensor/pump $\Leftrightarrow$ arduino/raspi interfaces
 
-\subsection{Day 3 $<$12:00 : Hackathon III}
+\subsection{Day 3 $<$12:00 : Hack`a'thing III}
 
 \subsubsection{Hardware II} 
 Integrate projects \ref{gas},\ref{spec}\&\ref{cult} into a simple DIY
