@@ -12,6 +12,7 @@
 \newcommand{\build}[0]{\textcolor{red}{\textbf{build}}}
 \newcommand{\code}[0]{\textcolor{blue}{\textbf{code}}}
 \newcommand{\hack}[0]{Hack`a'thing}
+\newcommand{\gasometer}[0]{\texttt{Gas`o'meter}}
 
 \parskip 0.3 cm
 \parindent 0 cm
@@ -48,7 +49,7 @@
 \label{proj}
 
 
-\subsection{Gas Flux: Gasometer}
+\subsection{Gas Flux: \gasometer{}}
 \label{gas}
 \paragraph{Project:} 
 Extend existing setup, co2meter's
@@ -164,7 +165,7 @@ e.g. \href{http://www.laborhandel24.de/9162625-de?utm_source=google_shopping&gcl
 a controllable syringe pump, sampling into the \texttt{Kaiten Eppi}
 (automated: pump sample into tubes, potentially pre-filled with
 chemicals, vortex, and transport them into liquid N$_2$ or other
-storage containers
+storage containers)
 
 \paragraph{Materials:}
 \begin{itemize}
@@ -191,6 +192,22 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 \item Sainsmart's Arduino Mega + Touchscreen: \obtain{}
 \end{itemize}
 
+\subsection{The Server}
+\paragraph{Project:} a master software running on a (detachable) linux 
+desktop that synchronizes and speaks via a comon interface to all
+Arduino and Raspberry Pi modules; the modules themselves can interpret
+get, set and act impulses (use arguments only when absolutely necessary)
+\paragraph{Materials:}
+\begin{itemize}
+\item \texttt{setTime(time\_t $t$)}: sets the current master time to
+  all modules
+\item \texttt{get(..., time\_t $t$)}: get all values, currently available 
+  (with a time stamp), or from a previous time t
+%\item \texttt{set(..., time\_t $t$)}: sets specific values, now or at an
+%  indicated future time $t$
+\item \texttt{act(..., time\_t $t$)}: act (switch on and off), now or at
+  future time  $t$
+\end{itemize}
 
 \newpage
 
@@ -215,7 +232,7 @@ Talks, 30-60 min:
 \subsection{Day 1 $>$13:00 : \hack{} I}
 
 \begin{itemize}
-\item Introduction to the gasometer: connecting sensors with Arduino,
+\item Introduction to the \gasometer{}: connecting sensors with Arduino,
   making an autonomous measurement device via Sainsmart's Touch Screen
 \item Introduction to Rob's reactor: complete setup for photosynthetic growth
 \item Self-organizing into teams: lab hardware (tubing etc.), control hardware
