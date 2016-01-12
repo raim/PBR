@@ -196,13 +196,21 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 \paragraph{Project:} a master software running on a (detachable) linux 
 desktop that synchronizes and speaks via a comon interface to all
 Arduino and Raspberry Pi modules; the modules themselves can interpret
-get, set and act impulses (use arguments only when absolutely necessary)
+get, set and act impulses (use arguments only when absolutely
+necessary).\\
+During an initializiation the server may inquire what an
+attached module provides (\textit{via} data IDs and SI units, meaningful
+time resolution) and handle it automatically. \\
+Variable higher order control or processing logics can be built
+using defined data and control IDs.
+
+
 \paragraph{Materials:}
 \begin{itemize}
 \item \texttt{setTime(time\_t $t$)}: sets the current master time to
   all modules
-\item \texttt{get(..., time\_t $t$)}: get all values, currently available 
-  (with a time stamp), or from a previous time t
+\item \texttt{get(..., time\_t $t$)}: get all values, currently
+  available (with a time stamp), or from a previous time t
 %\item \texttt{set(..., time\_t $t$)}: sets specific values, now or at an
 %  indicated future time $t$
 \item \texttt{act(..., time\_t $t$)}: act (switch on and off, set to a
