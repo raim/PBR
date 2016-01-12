@@ -2,8 +2,10 @@
 
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{textcomp}
+\usepackage{subfig}
 
 \newcommand{\obtain}[0]{\textcolor{orange}{\textbf{obtain}}}
 \newcommand{\avail}[0]{\textcolor{green}{\textbf{available}}}
@@ -27,6 +29,22 @@
 
 \section{PBR Hack`a'thing Projects}
 \label{proj}
+
+\begin{figure}[ht]
+  \begin{minipage}{.49\textwidth}
+    \subfloat[Dougie's Reactor]{
+      \includegraphics[width=\textwidth]{figures/fermentor_detailed.pdf}\\ 
+    }
+  \end{minipage}
+  \begin{minipage}{.49\textwidth}
+    \centering Monod: $\mu = \mu_{max} \frac{S}{S+K_S}$\\
+    \subfloat[Snoep \textit{et al.} 2009]{
+      \includegraphics[width=\textwidth]{figures/snoep09_fig2.pdf}
+    }
+  \end{minipage}
+\caption[]{Bioreactors}
+\end{figure}
+
 
 \subsection{Gas Flux: Gasometer}
 \label{gas}
