@@ -11,12 +11,12 @@
 \newcommand{\avail}[0]{\textcolor{green}{\textbf{available}}}
 \newcommand{\build}[0]{\textcolor{red}{\textbf{build}}}
 \newcommand{\code}[0]{\textcolor{blue}{\textbf{code}}}
-
+\newcommand{\hack}[0]{Hack`a'thing}
 
 \parskip 0.3 cm
 \parindent 0 cm
 
-\title{QTB PBR Hack`a'thing}
+\title{1$^{st}$ QTB PBR \hack{}}
 \subtitle{Soldering for and by beginners.}
 \date{March 2--4, 2016}
 
@@ -27,8 +27,6 @@
 %\normalsize
 \newpage
 
-\section{PBR Hack`a'thing Projects}
-\label{proj}
 
 \begin{figure}[ht]
   \begin{minipage}{.49\textwidth}
@@ -44,6 +42,10 @@
   \end{minipage}
 \caption[]{Bioreactors}
 \end{figure}
+
+
+\section{PBR \hack{} Projects}
+\label{proj}
 
 
 \subsection{Gas Flux: Gasometer}
@@ -66,7 +68,7 @@ sensors with Sainsmart's
   blowers!) to allow lower flow
 \item \build{} \& \code{} interface to \href{http://www.aalborg.com/index.php/main_page/product_overview/id_product_overview/63}{Aalborg XFM digital mass flow
   meter}: connect the Aalborg's RS 485 interface to Arduino hardware
-  serial Tx3,Rx3
+  serial Tx3/Rx3, and Ground
 \item \build{} \& \code{} valve control to measure several reactors;
   connect via Arduino software serial connections; perhaps attach to
   PSI Multicultivator
@@ -94,15 +96,16 @@ volume) is recorded or can be set.
   media flow, from media bottles through reactor vessel and out to
   waste bottle; connect \textit{via} tubing and pumps, record
   \textit{via} balance
-\item Add gassing system of project \ref{gas}
-\item Combine with \ref{spec} to make turbidostatic control
+\item \build{}: add gassing system of project \ref{gas}
+\item \build{} \& \code{}: combine with \ref{spec} to make
+  turbidostatic control
 \end{enumerate}
 
 
 \paragraph{Materials:}
 \begin{itemize}
-\item Media bottlesm, screw caps with inlet/outlet openings,
-  and tubing: \avail{} in the lab, but check!
+\item Media bottles, screw caps with inlet/outlet openings,
+  and tubing: \avail{} \& \obtain{}!
 \item Balance (e.g. Mettler Toledo
 \href{http://de.mt.com/de/de/home/products/Industrial_Weighing_Solutions/bench-scales/weighing-platforms/high-resolution/PBK785.html}{PBK785-3XS/f}): \obtain{}
 \item Peristaltic pumps: ordered?
@@ -155,11 +158,11 @@ e.g. \href{http://www.laborhandel24.de/9162625-de?utm_source=google_shopping&gcl
 \item Arduino and/or Raspberry Pi
 \end{itemize}
 
-\subsection{Single Cell Biology: Microfluidics Device} 
+\subsection{Single Cell Biology: Microfluidic Device} 
 \label{micro}
 
 \paragraph{Project:} Basic microfluidics and live-cell imaging device;
-scratch growth chambers and liquid flow channgels into microscope slide;
+scratch growth chambers and liquid flow channels into microscope slide;
 attach 2--3 pumps; and control \textit{via} arduino/screen
 
 \paragraph{Materials:}
@@ -178,76 +181,76 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 \subsection{Day 1 $<$12:00 : Building Bioreactors}
 
 Talks, 30-60 min:
+\begin{itemize}
+\item Rob's DIY Reactor - The Beginnings: The Captor -
+  Arduino-controlled mini PBR
+\item Dougie's DIY Reactor - 20 yrs Later
+\item Avantes - Spectrometry: Spectrometry applications, incl. NIR for
+  metabolite measurements and OD; software interface to Avantes
+  spectrometers
+\item CellDeg - Optimizing Photosynthetic Growth: Introduction to
+  CellDeg's 2.5 k Euro algal growth setup (overnight 30 g/L cyano
+  biomass)
+\end{itemize}
 
-\subsubsection{Rob's DIY Reactor - The Beginnings}
 
-The Captor - Arduino-controlled mini PBR
+\subsection{Day 1 $>$13:00 : \hack{} I}
 
-\subsubsection{Dougie's DIY Reactor - 20 yrs Later}
-\subsubsection{Avantes - Spectrometry}
+\begin{itemize}
+\item Introduction to the gasometer: connecting sensors with Arduino,
+  making an autonomous measurement device via Sainsmart's Touch Screen
+\item Introduction to Rob's reactor: complete setup for photosynthetic growth
+\item Self-organizing into teams: lab hardware (tubing etc.), control hardware
+(soldering etc.), software and/or by by projects (\ref{gas}--\ref{micro}) 
+\end{itemize}
 
-Spectrometry applications, incl. NIR for metabolite measurements and OD
+\subsection{Day 2 : \hack{} II}
 
-Software interface to Avantes spectrometers
+%Perhaps in teams, either by projects (\ref{gas}--\ref{micro}) or in
+%software vs. hardware (soldering/tubing) vs. biolab (cell cultures),
+%or -- most likely -- in dynamic self-organisation, working parallel on
+%all projects.
 
-\subsubsection{CellDeg - Optimizing Photosynthetic Growth}
+\begin{itemize}
+\item Hardware I: soldering, tubing
+\item Software I: probe/sensor/pump $\Leftrightarrow$ arduino/raspi interfaces
+\item Visit HHU's fine mechanics and glas blower work-shops, place
+  orders for stuff missing for above goals
+\end{itemize}
 
-Introduction to CellDeg's 2.5 k Euro algal growth setup (overnight 30 g/L
-cyano biomass)
+\subsection{Day 3 : \hack{} III}
 
-\subsection{Day 1 $>$13:00 : Hack`a'thing I}
+\begin{itemize}
+\item Hardware II: Integrate projects \ref{gas},\ref{spec}\&\ref{cult}
+  into a simple DIY reactor and/or with PSI FMT150 or Multicultivator
+%\item 
+%\end{itemize}
+%\subsection{Day 3 $>$13:00 : Consolidating}
+%\begin{itemize}
+\item Software II: arduino/raspi $\Leftrightarrow$  master/server interface\\
+  Standard data formats and interfaces
+\item Brain storming: relation of data and models and beer
+%\item Beer: relation of data and models and beer
+\end{itemize}
 
-Introduction to the gasometer: connecting sensors with Arduino,
-making an autonomous measurement device via Sainsmart's Touch Screen
+\section{Outlook: 2$^{nd}$ QTB PBR \hack{}}
 
-Introduction to Rob's reactor: complete setup for photosynthetic growth
-
-Self-organizing into teams: lab hardware (tubing etc.), control hardware
-(soldering etc.), software
-
-\subsection{Day 2 $<$12:00 : Photobioreactors in Research}
+\subsection{\textit{Growth Dynamics}: Photobioreactors in Research}
 
 Talks, 30-60 min:
 
 Nir Keren, Hellingwerf, Jan Cerveny, Dougie Murray,
 something microfluidics?
 
-\subsection{Day 2 $>$13:00 : Hack`a'thing II}
+\subsection{\textit{Single Cell Dynamics}: Microfluidic Devices}
+Integrate project \ref{micro} with the simple microscope in
+Ilka's lab, or a more advanced system (CAi?)
 
-Perhaps in teams, either by projects (\ref{gas}--\ref{micro}) or in
-software vs. hardware (soldering/tubing) vs. biolab (cell cultures),
-or -- most likely -- in dynamic self-organisation, working parallel on
-all projects.
+%\subsection{Growth Dynamics}
 
-\subsubsection{Hardware I} 
-soldering, tubing
+\subsection{\textit{Omics}: Sterile and Automated Sampling Devices}
 
-\subsubsection{Software I} 
-probe/sensor/pump $\Leftrightarrow$ arduino/raspi interfaces
-
-\subsection{Day 3 $<$12:00 : Hack`a'thing III}
-
-\subsubsection{Hardware II} 
-Integrate projects \ref{gas},\ref{spec}\&\ref{cult} into a simple DIY
-reactor and/or with PSI FMT150 or Multicultivator
-
-Integrate project \ref{micro} with the simple microscope in Ilka's lab,
-or a more advanced system (CAi?)
-
-Visit HHU's fine mechanics and glas blower work-shops, place orders 
-for stuff missing for above goals
-
-
-\subsection{Day 3 $>$13:00 : Consolidating}
-
-\subsubsection{Software II}
-arduino/raspi $\Leftrightarrow$  master/server interface
-
-Standard data formats and interfaces
-
-Brain storming: relation of data and models
-
-Beer: relation of data and models and beer
-
+Proper sampling for high-throughput data (mass spectrometry, sequencing)
+acquisition
 
 \end{document}
