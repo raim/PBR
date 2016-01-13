@@ -58,8 +58,7 @@ and
 \href{http://www.co2meter.com/collections/co2-sensors/products/cozir-5-100-co2-sensor}{CO2}
 sensors with Sainsmart's
 \href{http://www.sainsmart.com/featured-products/sainsmart-mega2560-board-3-5-tft-lcd-module-display-shield-kit-for-atmel-atmega-avr-16au-atmega8u2.html}{Arduino
-  Mega+Touch screen}; see directory \texttt{offgas/arduino} in
-\url{https://git.hhu.de/machne/PSIControl} for Arduino code
+  Mega+Touch screen}
 
 \begin{enumerate}
 \item \code{} sensor calibration routines via touch-screen (use PSI
@@ -75,6 +74,12 @@ sensors with Sainsmart's
   PSI Multicultivator
 \end{enumerate}
 
+\paragraph{Ressources:}
+\begin{itemize}
+\item Code in  \texttt{offgas/arduino} of
+  \url{https://git.hhu.de/machne/PSIControl} 
+\end{itemize}
+
 \paragraph{Materials:}
 
 \begin{itemize}
@@ -84,35 +89,7 @@ sensors with Sainsmart's
   interface: \obtain{}
 \end{itemize}
 
-\subsection{Liquid Flux: Continuous Culture \& Turbidostat} 
-\label{cult}
-
-\paragraph{Project:} build a module consisting of media and waste bottles, a reactor vessel, peristaltic pump(s), and a balance; pump and balance are controlled  \textit{via} serial interfaces from  an Arduino+Touchscreen and/or
-Raspberry Pi. The flow rate is controlled \textit{via} pump and
-recorded \textit{via} the balance, dilution rate (depends on culture
-volume) is recorded or can be set.
-
-\begin{enumerate}
-\item \build{} a simple reactor vessel (Schott bottles) with liquid
-  media flow, from media bottles through reactor vessel and out to
-  waste bottle; connect \textit{via} tubing and pumps, record
-  \textit{via} balance
-\item \build{}: add gassing system of project \ref{gas}
-\item \build{} \& \code{}: combine with \ref{spec} to make
-  turbidostatic control
-\end{enumerate}
-
-
-\paragraph{Materials:}
-\begin{itemize}
-\item Media bottles, screw caps with inlet/outlet openings,
-  and tubing: \avail{} \& \obtain{}!
-\item Balance (e.g. Mettler Toledo
-\href{http://de.mt.com/de/de/home/products/Industrial_Weighing_Solutions/bench-scales/weighing-platforms/high-resolution/PBK785.html}{PBK785-3XS/f}): \obtain{}
-\item Peristaltic pumps: ordered?
-\item Arduino: \obtain{}
-\end{itemize}
-
+\newpage
 \subsection{Light Flux: Spectrometer} 
 \label{spec}
 \paragraph{Project:} 
@@ -139,7 +116,93 @@ Simple spectrometric measuring tool based on
   blowers
 \end{itemize}
 
+\newpage
+\subsection{Liquid Flux: Continuous Culture \& Turbidostat} 
+\label{cult}
 
+\paragraph{Project:} build a module consisting of media and waste bottles, a reactor vessel, peristaltic pump(s), and a balance; pump and balance are controlled  \textit{via} serial interfaces from  an Arduino+Touchscreen and/or
+Raspberry Pi. The flow rate is controlled \textit{via} pump and
+recorded \textit{via} the balance, flow rate (depends on culture
+volume) is recorded or can be set after a setup-specific (tubing)
+calibration routine
+
+
+
+\begin{enumerate}
+\item \build{} a simple reactor vessel (Schott bottles) with liquid
+  media flow, from media bottles through reactor vessel and out to
+  waste bottle; connect \textit{via} tubing and pumps
+\item \code{}: analog control of peristaltic motor speed and recording of
+  weight loss and/or gain to record mass flow (g/min)
+\item \code{}: calibration routine to calibrate pump speed to weight loss/gain
+  for a given setup
+\item \build{} \& \code{}: combine with \ref{spec} to make
+  turbidostatic control
+\item \build{}: add gassing system of project \ref{gas} to make a first
+  simple bioreactor
+\end{enumerate}
+
+\paragraph{Ressources:}
+\begin{itemize}
+\item
+  \href{http://www.instructables.com/id/Control-peristaltic-pump-with-TA7291P-and-an-Ardui/}{using
+    Arduino's PWM analog interface to control pump motor speed}
+\item \href{http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG}{Arduino library for Elecrow weight sensor kit 3 kg}
+\item \href{https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf}{HX711 24-Bit Analog-to-Digital Converter (ADC) for Weigh Scales}
+\end{itemize}
+
+\paragraph{Materials:}
+\begin{itemize}
+\item Media bottles, screw caps with inlet/outlet openings,
+  and tubing: \avail{} \& \obtain{}!
+\item Balance - \obtain{}\\
+  fancy:
+  \href{http://de.mt.com/de/de/home/products/Industrial_Weighing_Solutions/bench-scales/weighing-platforms/high-resolution/PBK785.html}{Mettler Toledo, PBK785-3XS/f}\\cheap:
+  \href{http://www.elecrow.com/weight-sensor-kit-3kg-p-883.html}{Elecrow
+    Weight Sensor kit 3kg for Arduino}
+\item Peristaltic pumps - \obtain{}\\ fancy:
+  \href{http://www.drifton.dk/de/product/lp-bt100-2j-13/}{Longer Pump
+    LP-BT100-2J, DG-2(10)}\\cheap:
+  \href{http://www.ismatec.com/int_e/pumps/t_ecoline/ecomsca4.htm}{Ismatec
+    Ecoline VC-MS/CA4-12}\\ cheapest: \href{Welco WPM}{Welco WPM}
+\item Sainsmart Arduino Mega + Touchscreen - \obtain{}
+\end{itemize}
+
+\newpage
+\subsection{The Server}
+\paragraph{Project:} a master software running on a (detachable) linux 
+desktop that synchronizes and speaks via a comon interface to all
+Arduino and Raspberry Pi modules; the modules themselves can interpret
+get, set and act impulses (use arguments only when absolutely
+necessary).\\
+During an initializiation the server may inquire what an
+attached module provides (\textit{via} data IDs and SI units, meaningful
+time resolution) and handle it automatically. \\
+Variable higher order control or processing logics can be built
+using defined data and control IDs.
+\begin{enumerate}
+\item \build{} combine of gas (\ref{gas}), liquid (\ref{cult})
+  and light (\ref{spec}) modules into a bioreactor
+\item \code{}: master program to synchronize and record data from
+  the three modules
+\item \code{}: combine e.g. \ref{spec} \& \ref{cult} to implement
+  turbidostat control
+\end{enumerate}
+
+
+\paragraph{Materials:}
+\begin{itemize}
+\item \texttt{setTime(time\_t $t$)}: sets the current master time to
+  all modules
+\item \texttt{get(..., time\_t $t$)}: get all values, currently
+  available (with a time stamp), or from a previous time t
+%\item \texttt{set(..., time\_t $t$)}: sets specific values, now or at an
+%  indicated future time $t$
+\item \texttt{act(..., time\_t $t$)}: act (switch on and off, set to a
+  specific value), now or at future time $t$
+\end{itemize}
+
+\newpage
 \subsection{Heat Flux: Water Bath Thermostat}
 \label{heat}
 
@@ -159,6 +222,7 @@ e.g. \href{http://www.laborhandel24.de/9162625-de?utm_source=google_shopping&gcl
 \item Arduino and/or Raspberry Pi
 \end{itemize}
 
+\newpage
 \subsection{The \texttt{Kaiten Eppi}: Automated Sampling Device} 
 \label{sampling}
 \paragraph{Projects:} build sterile and automated sampling device; using
@@ -176,7 +240,7 @@ storage containers)
 \end{itemize}
 
 
-
+\newpage
 \subsection{Single Cell Biology: Microfluidic Device} 
 \label{micro}
 
@@ -192,30 +256,6 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 \item Sainsmart's Arduino Mega + Touchscreen: \obtain{}
 \end{itemize}
 
-\subsection{The Server}
-\paragraph{Project:} a master software running on a (detachable) linux 
-desktop that synchronizes and speaks via a comon interface to all
-Arduino and Raspberry Pi modules; the modules themselves can interpret
-get, set and act impulses (use arguments only when absolutely
-necessary).\\
-During an initializiation the server may inquire what an
-attached module provides (\textit{via} data IDs and SI units, meaningful
-time resolution) and handle it automatically. \\
-Variable higher order control or processing logics can be built
-using defined data and control IDs.
-
-
-\paragraph{Materials:}
-\begin{itemize}
-\item \texttt{setTime(time\_t $t$)}: sets the current master time to
-  all modules
-\item \texttt{get(..., time\_t $t$)}: get all values, currently
-  available (with a time stamp), or from a previous time t
-%\item \texttt{set(..., time\_t $t$)}: sets specific values, now or at an
-%  indicated future time $t$
-\item \texttt{act(..., time\_t $t$)}: act (switch on and off, set to a
-  specific value), now or at future time $t$
-\end{itemize}
 
 \newpage
 
