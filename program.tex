@@ -31,6 +31,8 @@
 %\normalsize
 \newpage
 
+\section{PBR \hack{} Projects}
+\label{proj}
 
 \begin{figure}[ht]
   \begin{minipage}{.49\textwidth}
@@ -48,10 +50,8 @@
 \end{figure}
 
 
-\section{PBR \hack{} Projects}
-\label{proj}
 
-
+\newpage
 \subsection{Gas Flux: \gasometer{}}
 \label{gas}
 \paragraph{Project:} 
@@ -79,7 +79,12 @@ sensors with Sainsmart's
 
 \paragraph{Ressources:}
 \begin{itemize}
-\item Code in  \texttt{offgas/arduino} of
+\item Sensor manuals in \texttt{manuals/offgas/} at
+  \url{https://git.hhu.de/machne/PSIControl}:
+  \texttt{Manual-CM-0201-UV-Flux-Oxygen.pdf},
+  \texttt{Manual-GSS-Sensors.pdf}, and\\
+  \texttt{A\_XFM\_Manual\_TD0701M[...].pdf}
+\item Code in  \texttt{offgas/arduino/} at
   \url{https://git.hhu.de/machne/PSIControl} 
 \end{itemize}
 
@@ -108,9 +113,17 @@ Simple spectrometric measuring tool based on
   online recording
 \end{enumerate}
 
+\paragraph{Ressources:}
+\begin{itemize}
+\item
+  \href{http://www.avantes.com/images/productsheets/AvaSpec_Mini5.pdf}{AvaSpec-Mini
+    data sheet} in \texttt{manuals/spectrometer/} at
+  \url{https://git.hhu.de/machne/PSIControl}
+\end{itemize}
+
 \paragraph{Materials:}
 \begin{itemize}
-\item AVASPEC-MINI2048L-V25, Minispectrometer: \avail{}\\ Mini
+\item AvaSpec-Mini2048l-V25, Minispectrometer: \avail{}\\ Mini
   spectrometer, 2048 Large pixels, grating-MN0600-0.50 (350-885nm),
   OSC, 25\textmu{}m slit, USB2 interface, AvaSoft-Basic
 \item Fiber optic cables, VIS/NIR: 1 m, 200 \textmu{}m VIS/NIR and 1m,
@@ -125,12 +138,12 @@ Simple spectrometric measuring tool based on
 \begin{figure}[ht]
   \begin{minipage}{.49\textwidth}
     \subfloat[AvaSpec-Mini 2048]{
-      \includegraphics[width=\textwidth]{figures/avaspec-mini.png}
+      \includegraphics[width=.8\textwidth]{figures/avaspec-mini.png}
     }
   \end{minipage}
   \begin{minipage}{.49\textwidth}
     \subfloat[]{
-      \centering TODO: setup?
+      \centering setup sketch here
     }
   \end{minipage}
 \caption[]{Spectrometer Module}
@@ -140,12 +153,13 @@ Simple spectrometric measuring tool based on
 \subsection{Liquid Flux: Continuous Culture \& Turbidostat} 
 \label{cult}
 
-\paragraph{Project:} build a module consisting of media and waste bottles, a reactor vessel, peristaltic pump(s), and a balance; pump and balance are controlled  \textit{via} serial interfaces from  an Arduino+Touchscreen and/or
-Raspberry Pi. The flow rate is controlled \textit{via} pump and
-recorded \textit{via} the balance, flow rate (depends on culture
-volume) is recorded or can be set after a setup-specific (tubing)
-calibration routine
-
+\paragraph{Project:} build a module consisting of media and waste bottles, 
+a reactor vessel, peristaltic pump(s), and a scale; pump and scale are
+controlled \textit{via} serial interfaces from an
+Arduino+Touchscreen. The flow rate is controlled \textit{via} the pump
+motor speed and recorded \textit{via} the scale; the flow rate is
+recorded or can be set after a setup-specific (tubing) calibration
+routine
 
 
 \begin{enumerate}
@@ -157,8 +171,8 @@ calibration routine
   weight loss and/or gain to record mass flow (g/min)
 \item \code{}: routine to calibrate pump speed to weight loss/gain
   for a specific setup; store calibration on SD card, which allows
-  to also set pump speed in terms of g/min, or if provided with a culture
-  volume in terms of dilution rate (\ph{})
+  to also set pump speed in g/min, or if provided with a culture
+  volume, as culture dilution rate (\ph{})
 \item \build{} \& \code{}: combine with \ref{spec} to make
   turbidostatic control
 \item \build{}: add gassing system of project \ref{gas} to make a first
@@ -167,18 +181,19 @@ calibration routine
 
 \paragraph{Ressources:}
 \begin{itemize}
-\item
-  \href{http://www.instructables.com/id/Control-peristaltic-pump-with-TA7291P-and-an-Ardui/}{using
-    Arduino's PWM analog interface to control pump motor speed}
+\item Arduino tutorials for
+  \href{http://www.instructables.com/id/Control-peristaltic-pump-with-TA7291P-and-an-Ardui/}{Adafruit
+    peristaltic pump} and general
+  \href{http://playground.arduino.cc/TA7291PDCMOTORCONTROLLER/TA7291PDCMOTORCONTROLLER}{DC motor control} and \href{https://www.adafruit.com/products/1438}{Adafruit motor shield}
 \item \href{http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG}{Arduino library for Elecrow weight sensor kit 3 kg}
 \item \href{https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf}{HX711 24-Bit Analog-to-Digital Converter (ADC) for Weigh Scales}
 \end{itemize}
 
 \paragraph{Materials:}
 \begin{itemize}
-\item Media bottles, screw caps with inlet/outlet openings,
+\item Bottles, screw caps with inlet/outlet openings,
   and tubing: \avail{} \& \obtain{}!
-\item Balance - \obtain{}\\
+\item Scale - \obtain{}\\
   fancy:
   \href{http://de.mt.com/de/de/home/products/Industrial_Weighing_Solutions/bench-scales/weighing-platforms/high-resolution/PBK785.html}{Mettler Toledo, PBK785-3XS/f}\\cheap:
   \href{http://www.elecrow.com/weight-sensor-kit-3kg-p-883.html}{Elecrow
@@ -187,7 +202,8 @@ calibration routine
   \href{http://www.drifton.dk/de/product/lp-bt100-2j-13/}{Longer Pump
     LP-BT100-2J, DG-2(10)}\\cheap:
   \href{http://www.ismatec.com/int_e/pumps/t_ecoline/ecomsca4.htm}{Ismatec
-    Ecoline VC-MS/CA4-12}\\ cheapest: \href{Welco WPM}{Welco WPM}
+    Ecoline VC-MS/CA4-12}\\ cheaper: \href{Welco WPM}{Welco WPM} or
+  cheapest: \href{https://www.adafruit.com/product/1150}{Adafruit}
 \item Sainsmart Arduino Mega + Touchscreen - \obtain{}
 \end{itemize}
 
