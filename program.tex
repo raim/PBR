@@ -13,6 +13,9 @@
 \newcommand{\code}[0]{\textcolor{blue}{\textbf{code}}}
 \newcommand{\hack}[0]{Hack`a'thing}
 \newcommand{\gasometer}[0]{\texttt{Gas`o'meter}}
+\newcommand{\ph}[0]{h{\small$^{-1}$}}
+\newcommand{\ox}[0]{O$_2$}
+\newcommand{\cox}[0]{CO$_2$}
 
 \parskip 0.3 cm
 \parindent 0 cm
@@ -53,9 +56,9 @@
 \label{gas}
 \paragraph{Project:} 
 Extend existing setup, co2meter's
-\href{http://www.co2meter.com/collections/co2-sensors/oxygen-sensors}{O2}
+\href{http://www.co2meter.com/collections/co2-sensors/oxygen-sensors}{\ox{}}
 and
-\href{http://www.co2meter.com/collections/co2-sensors/products/cozir-5-100-co2-sensor}{CO2}
+\href{http://www.co2meter.com/collections/co2-sensors/products/cozir-5-100-co2-sensor}{\cox{}}
 sensors with Sainsmart's
 \href{http://www.sainsmart.com/featured-products/sainsmart-mega2560-board-3-5-tft-lcd-module-display-shield-kit-for-atmel-atmega-avr-16au-atmega8u2.html}{Arduino
   Mega+Touch screen}
@@ -94,7 +97,7 @@ sensors with Sainsmart's
 \label{spec}
 \paragraph{Project:} 
 Simple spectrometric measuring tool based on
-\href{http://www.avantes.com/products/spectrometers/compactline/item/723-avaspec-mini}{AvaSpec-Mini2048l-U25}
+\href{http://www.avantes.com/products/spectrometers/compactline/item/723-avaspec-mini}{AvaSpec-Mini2048l-V25}
 
 \begin{enumerate}
 \item Basic: Connect to Rasperry Pi, using drivers provides by
@@ -107,14 +110,31 @@ Simple spectrometric measuring tool based on
 
 \paragraph{Materials:}
 \begin{itemize}
-\item AVASPEC-MINI2048L-V25, Minispectrometer: \avail{}
+\item AVASPEC-MINI2048L-V25, Minispectrometer: \avail{}\\ Mini
+  spectrometer, 2048 Large pixels, grating-MN0600-0.50 (350-885nm),
+  OSC, 25\textmu{}m slit, USB2 interface, AvaSoft-Basic
 \item Fiber optic cables, VIS/NIR: 1 m, 200 \textmu{}m VIS/NIR and 1m,
-  600 \textmu{}m: \avail{}
+  600 \textmu{}m: \avail{}\\
+  SMA terminations, metal protection sleeves
 \item Raspberry Pi Version 1: \obtain{}
 \item LED system: use PSI LEDs or \obtain{}
 \item Reactor probe: \build{} together with fine mechanics or glas
   blowers
 \end{itemize}
+
+\begin{figure}[ht]
+  \begin{minipage}{.49\textwidth}
+    \subfloat[AvaSpec-Mini 2048]{
+      \includegraphics[width=\textwidth]{figures/avaspec-mini.png}
+    }
+  \end{minipage}
+  \begin{minipage}{.49\textwidth}
+    \subfloat[]{
+      \centering TODO: setup?
+    }
+  \end{minipage}
+\caption[]{Spectrometer Module}
+\end{figure}
 
 \newpage
 \subsection{Liquid Flux: Continuous Culture \& Turbidostat} 
@@ -131,11 +151,14 @@ calibration routine
 \begin{enumerate}
 \item \build{} a simple reactor vessel (Schott bottles) with liquid
   media flow, from media bottles through reactor vessel and out to
-  waste bottle; connect \textit{via} tubing and pumps
+  waste bottle 
+\item \code{}: calibration routine for the weight sensor module
 \item \code{}: analog control of peristaltic motor speed and recording of
   weight loss and/or gain to record mass flow (g/min)
-\item \code{}: calibration routine to calibrate pump speed to weight loss/gain
-  for a given setup
+\item \code{}: routine to calibrate pump speed to weight loss/gain
+  for a specific setup; store calibration on SD card, which allows
+  to also set pump speed in terms of g/min, or if provided with a culture
+  volume in terms of dilution rate (\ph{})
 \item \build{} \& \code{}: combine with \ref{spec} to make
   turbidostatic control
 \item \build{}: add gassing system of project \ref{gas} to make a first
