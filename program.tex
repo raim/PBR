@@ -55,22 +55,27 @@
 \subsection{Gas Flux: \gasometer{}}
 \label{gas}
 \paragraph{Project:} 
-Extend existing setup, co2meter's
+Extend existing setup (co2meter's
 \href{http://www.co2meter.com/collections/co2-sensors/oxygen-sensors}{\ox{}}
 and
 \href{http://www.co2meter.com/collections/co2-sensors/products/cozir-5-100-co2-sensor}{\cox{}}
 sensors with Sainsmart's
 \href{http://www.sainsmart.com/featured-products/sainsmart-mega2560-board-3-5-tft-lcd-module-display-shield-kit-for-atmel-atmega-avr-16au-atmega8u2.html}{Arduino
-  Mega+Touch screen}
+  Mega+Touch screen}) by our brand new digital mass flow meter
+\href{http://www.aalborg.com/index.php/main_page/product_overview/id_product_overview/63}{Aalborg
+  XFM}; write calibration routines for all sensors; build water trap
+and tubing to connect to the PSI or our DIY reactor and decrease the
+gas flow so that we can measure something. Perhaps add valve control
+to measure multiple reactors in series.
 
 \begin{enumerate}
-\item \code{} sensor calibration routines via touch-screen (use PSI
-  gas mixing system)
 \item \build{} water trap, tubing path from reactor, and casing for
   sensors and Arduino; \build{} improved gassing system (glas
   blowers!) to allow lower flow
-\item \build{} \& \code{} interface to \href{http://www.aalborg.com/index.php/main_page/product_overview/id_product_overview/63}{Aalborg XFM digital mass flow
-  meter}: connect the Aalborg's RS 485 interface to Arduino hardware
+\item \code{} sensor calibration routines via touch-screen (use PSI
+  gas mixing system)
+\item \build{} \& \code{} interface to Aalborg XFM digital mass flow
+  meter: connect the Aalborg's RS 485 interface to Arduino hardware
   serial Tx3/Rx3, and Ground
 \item \build{} \& \code{} valve control to measure several reactors;
   connect via Arduino software serial connections; perhaps attach to
@@ -207,7 +212,35 @@ routine
 \item Sainsmart Arduino Mega + Touchscreen - \obtain{}
 \end{itemize}
 
-\newpage
+\begin{figure}[ht]
+  \begin{minipage}{.49\textwidth}
+    \subfloat[Elecrow Scale Module]{
+      \includegraphics[width=.8\textwidth]{figures/elecrow_scale.png}
+    }\\
+    \subfloat[Adafruit Peristaltic Pump]{
+      \includegraphics[width=.8\textwidth]{figures/adafruit_pump.png}
+    }
+  \end{minipage}
+  \begin{minipage}{.5\textwidth}
+    \subfloat[Fritzing scheme for the Pump]{
+      \includegraphics[width=\textwidth]{figures/pump_fritzing.png}
+    }
+  \end{minipage}
+\caption[]{\textbf{Continuous Culture Module}. The elecrow scale
+  module is based on the Hx711 load-cell amplifier (24-bit analog-
+  to-digital converter) and connected to 5V, Gnd and two analog pins
+  of the Arduino and comes with an
+  \href{http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG}{Arduino
+    library}. An \href{https://www.adafruit.com/product/1150}{Adafruit
+    peristaltic pump} (12 v) is run by a ``geared down DC motor'' and
+  requires a Toshiba TA7291P Bridge Driver (0-20V 1A; 2A peak) to
+  control pump direction and speed \textit{via} Arduino's PWM pins,
+  see the
+  \href{http://www.instructables.com/id/Control-peristaltic-pump-with-TA7291P-and-an-Ardui/}{\textit{instructable}
+    tutorial}.}
+\end{figure}
+
+\clearpage
 \subsection{The Server}
 \paragraph{Project:} a master software running on a (detachable) linux 
 desktop that synchronizes and speaks via a comon interface to all
