@@ -9,6 +9,7 @@
 
 \definecolor{steelblue}{rgb}{0.36, 0.54, 0.66}
 
+\newcommand{\git}[0]{\href{https://git.hhu.de/machne/pbr_hackathon_201503}{PBR git}}
 \newcommand{\ordered}[0]{\textcolor{steelblue}{\textbf{ordered}}}
 \newcommand{\obtain}[0]{\textcolor{orange}{\textbf{obtain}}}
 \newcommand{\avail}[0]{\textcolor{green}{\textbf{available}}}
@@ -67,9 +68,10 @@ sensors with Sainsmart's
   Mega+Touch screen}) by our brand new digital mass flow meter
 \href{http://www.aalborg.com/index.php/main_page/product_overview/id_product_overview/63}{Aalborg
   XFM}; write calibration routines for all sensors; build water trap
-and tubing to connect to the PSI or our DIY reactor and decrease the
-gas flow so that we can measure something. Perhaps add valve control
-to measure multiple reactors in series.
+and tubing to connect to the PSI or our DIY reactor and increase gas
+transfer (smaller bubbles) and decrease overall gas flow so that we
+can measure cellular activity. Perhaps add valve control to measure
+multiple reactors in series.
 
 \begin{enumerate}
 \item \build{} water trap, tubing path from reactor, and casing for
@@ -87,13 +89,13 @@ to measure multiple reactors in series.
 
 \paragraph{Resources:}
 \begin{itemize}
-\item Sensor manuals in \texttt{manuals/offgas/} at
-  \url{https://git.hhu.de/machne/PSIControl}:
+\item Sensor manuals in \texttt{code/manuals/offgas/} at the
+  \git{}:\\
   \texttt{Manual-CM-0201-UV-Flux-Oxygen.pdf},
   \texttt{Manual-GSS-Sensors.pdf}, and\\
   \texttt{A\_XFM\_Manual\_TD0701M[...].pdf}
-\item Code in  \texttt{offgas/arduino/} at
-  \url{https://git.hhu.de/machne/PSIControl} 
+\item Code in  \texttt{code/offgas/arduino/} at the
+  \git{}
 \end{itemize}
 
 \paragraph{Materials:}
@@ -150,8 +152,7 @@ Simple spectrometric measuring tool based on
 \begin{itemize}
 \item
   \href{http://www.avantes.com/images/productsheets/AvaSpec_Mini5.pdf}{AvaSpec-Mini
-    data sheet} in \texttt{manuals/spectrometer/} at
-  \url{https://git.hhu.de/machne/PSIControl}
+    data sheet} in \texttt{code/manuals/light/} at the \git{}
 \end{itemize}
 
 \paragraph{Materials:}
@@ -226,17 +227,18 @@ routine
 \begin{itemize}
 \item Bottles, screw caps with inlet/outlet openings,
   and tubing: \avail{} \& \obtain{}!
-\item Scale - \obtain{}\\
+\item Scale - \ordered{}\\
   fancy:
   \href{http://de.mt.com/de/de/home/products/Industrial_Weighing_Solutions/bench-scales/weighing-platforms/high-resolution/PBK785.html}{Mettler Toledo, PBK785-3XS/f}\\cheap:
   \href{http://www.elecrow.com/weight-sensor-kit-3kg-p-883.html}{Elecrow
-    Weight Sensor kit 3kg for Arduino} - \ordered{}
-\item Peristaltic pumps - \obtain{}\\ fancy:
+    Weight Sensor kit 3kg for Arduino} $\leftarrow$ \ordered{}
+\item Peristaltic pumps - \ordered{}\\ fancy:
   \href{http://www.drifton.dk/de/product/lp-bt100-2j-13/}{Longer Pump
     LP-BT100-2J, DG-2(10)}\\cheap:
   \href{http://www.ismatec.com/int_e/pumps/t_ecoline/ecomsca4.htm}{Ismatec
     Ecoline VC-MS/CA4-12}\\ cheaper: \href{Welco WPM}{Welco WPM} or
   cheapest: \href{https://www.adafruit.com/product/1150}{Adafruit}
+  $\leftarrow$ \ordered{}
 \item Toshiba TA7291P Bridge Driver - \ordered{}
 \item Sainsmart Arduino Mega + Touchscreen - \ordered{}
 \end{itemize}
@@ -296,7 +298,7 @@ using defined data and control IDs.
 \item \texttt{setTime(time\_t $t$)}: sets the current master time to
   all modules
 \item \texttt{get(..., time\_t $t$)}: get all values, currently
-  available (with a time stamp), or from a previous time t
+  available (with a time stamp), or from a previous time $t$
 %\item \texttt{set(..., time\_t $t$)}: sets specific values, now or at an
 %  indicated future time $t$
 \item \texttt{act(..., time\_t $t$)}: act (switch on and off, set to a
@@ -373,8 +375,8 @@ Talks, 30-60 min:
   metabolite measurements and OD; software interface to Avantes
   spectrometers
 \item CellDeg - Optimizing Photosynthetic Growth: Introduction to
-  CellDeg's 2.5 k Euro algal growth setup (overnight 30 g/L cyano
-  biomass)
+  CellDeg's 2.5 k Euro algal growth setup (30 g/L cyano
+  biomass in three days)
 \end{itemize}
 
 
@@ -457,7 +459,7 @@ Ilka's lab, or a more advanced system (CAi?)
 
 \subsection{\textit{Omics}: Sterile and Automated Sampling Devices}
 
-Proper sampling for high-throughput data (mass spectrometry, sequencing)
-acquisition
+Proper sampling for high-throughput data acquisition (mass
+spectrometry, sequencing) - the \texttt{Kaiten Eppi}
 
 \end{document}
