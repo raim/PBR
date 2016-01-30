@@ -6,6 +6,7 @@
 \usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{subfig}
+\usepackage{amsmath}
 
 \definecolor{steelblue}{rgb}{0.36, 0.54, 0.66}
 
@@ -54,6 +55,48 @@
 \end{figure}
 
 
+\begin{figure}
+\begin{minipage}{.5\textwidth}
+  \begin{equation*}
+    \label{eqn:ancat}
+    \begin{aligned}
+      \frac{\text{d}X}{\text{d}t} &= (\mu_{ab} - \phi) X  \\
+      \frac{\text{d}S}{\text{d}t} &= \phi (S_{in} - S)-(\mu_{ab} + \mu_{cd}) X\\  
+      \frac{\text{d}atp}{\text{d}t} &= (n_{cd} \mu_{cd} - n_{ab} \mu_{ab} - \mu_{m})\frac{C_c}{V_c} - \mu_{ab} atp\\
+      \frac{\text{d}G}{\text{d}t} &= k_La (G_{in}^* - G) - n_{g} \mu_{cd} X\\
+      adp & = a_{tot} - atp
+    \end{aligned}
+  \end{equation*}
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+  \begin{equation*}
+    \begin{aligned}
+      \mu_{ab} &\equiv f(S,atp)\\
+      \mu_{cd} &\equiv f(S,G,adp)\\
+      \mu_m &\equiv f(S,ROS)
+      n_{cd},\,n_{ab} &\equiv f(S) 
+    \end{aligned}
+  \end{equation*}
+\end{minipage}
+\caption{Growth in Continuous Culture: liquid and gas flux equations} 
+\end{figure}
+
+\newpage
+\subsection{Resources - Material and Ideas}
+
+Designs \& Instructions:
+\begin{itemize}
+\item \href{http://playground.arduino.cc/}{Arduino Playground}: Wiki for Arduino-based Designs
+\item \href{http://www.instructables.com/}{Instructables}: Diverse DIY Designs
+\item \href{https://www.thingiverse.com/}{Thingiverse}: 3D Printer Designs
+\end{itemize}
+Shops:
+\begin{itemize}
+\item \href{https://www.conrad.de/de/bauelemente-t04.html}{Conrad}: online and offline shop, DE
+\item \href{http://www.elecrow.com/}{Elecrow}: online shop, China
+\item \href{https://www.adafruit.com/}{Adafruit}: online shop, USA
+\item \href{https://www.fasttech.com/}{Fasttech}: online shop, China
+\end{itemize}
 
 \newpage
 \subsection{Gas Flux: \gasometer{}}
