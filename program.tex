@@ -36,8 +36,72 @@
 %\normalsize
 \newpage
 
-\section{PBR \hack{} Projects}
-\label{proj}
+
+\section{Program}
+
+\subsection{March 2 $<$12:00 : Building Bioreactors}
+
+Talks, 30-60 min:
+\begin{itemize}
+\item Rob's DIY Reactor - The Beginnings: \texttt{NinjaPBR} -
+  Arduino-controlled mini PBR
+\item Dougie's DIY Reactor - 20 yrs Later
+\item Avantes - Spectrometry: Spectrometry applications, incl. NIR for
+  metabolite measurements and OD; software interface to Avantes
+  spectrometers
+\item CellDeg - Optimizing Photosynthetic Growth: Introduction to
+  CellDeg's 2.5 k Euro algal growth setup (30 g/L cyano
+  biomass in three days)
+\end{itemize}
+
+
+\subsection{March 2 $>$13:00 : \hack{} I}
+
+\begin{itemize}
+\item Introduction to the \gasometer{}: connecting sensors with Arduino,
+  making an autonomous measurement device via Sainsmart's Touch Screen
+\item Introduction to Rob's reactor: complete setup for photosynthetic growth
+\item Self-organizing into teams: lab hardware (tubing etc.), control hardware
+(soldering etc.), software and/or by by projects (\ref{gas}--\ref{micro}) 
+\end{itemize}
+
+\subsection{March 3 : \hack{} II}
+
+%Perhaps in teams, either by projects (\ref{gas}--\ref{micro}) or in
+%software vs. hardware (soldering/tubing) vs. biolab (cell cultures),
+%or -- most likely -- in dynamic self-organisation, working parallel on
+%all projects.
+
+\begin{itemize}
+\item Hardware I: soldering, tubing
+\item Software I: probe/sensor/pump $\Leftrightarrow$ arduino/raspi interfaces
+\item Visit HHU's fine mechanics and glas blower work-shops, place
+  orders for stuff missing for above goals
+\end{itemize}
+
+\subsection{March 4 : \hack{} III}
+
+\begin{itemize}
+\item Hardware II: Integrate projects \ref{gas},\ref{spec}\&\ref{cult}
+  into a simple DIY reactor and/or with PSI FMT150 or Multicultivator
+%\item 
+%\end{itemize}
+%\subsection{Day 3 $>$13:00 : Consolidating}
+%\begin{itemize}
+\item Software II: arduino/raspi $\Leftrightarrow$  master/server interface\\
+  Standard data formats and interfaces
+\item Brain storming: relation of data and models and beer
+%\item Beer: relation of data and models and beer
+\end{itemize}
+
+\subsection*{Resources - Materials, Designs and Ideas}
+
+Please see the
+\href{https://wiki.hhu.de/display/QTBP/1st+QTB+PBR+Hack\%60a'thing}{Hack`a'thing
+  Wiki} for link lists of DIY bioreactors, DIY lab ware, 3D printer
+designs, general DIY websites, and electronics suppy shops.
+
+This program and all code is at the \href{https://git.hhu.de/machne/pbr_hackathon_201503/tree/master}{HHU git project}.
 
 \begin{figure}[ht]
   \begin{minipage}{.49\textwidth}
@@ -82,44 +146,44 @@
 \caption{Growth in Continuous Culture: liquid and gas flux equations} 
 \end{figure}
 
-\newpage
-\subsection*{Resources - Materials, Designs and Ideas}
-
-\paragraph{DIY Bioreactors:}
-\begin{itemize}
-\item \href{http://www.yo-que.ch/nmrlab/mediawiki-1.15.1/index.php/Bioreactor}{Open source DIY bioreactor} and its \href{https://github.com/bioreactor}{code on github}
-\item \href{https://github.com/Bioreactor/Code-Bioreactor}{Github project for Arduino-controlled bioreactor}
-\item \href{http://onlinebioreactor.org/}{Onlinebioreactor: Arduino wiring schematics and source code for a temperature and pH measurements of a bioreactor}
-\item \href{http://www.instructables.com/id/An-Algae-Bioreactor-from-Recycled-Water-Bottles/}{An Algae Bioreactor from Recycled Water Bottles}
-\item \href{https://groups.google.com/forum/#!msg/diybio/j1oucFRuPUk/zz1Y_gE0PJkJ}{Google Group: DIY Bioreactor and Bioreactor controller}
-\item \href{http://jun.ucsd.edu/mother_machine.php}{The Jun lab's Mother Machine}
-\item \href{http://www.pellinglab.net/diy/diyco2incubator/}{Pelling lab's CO2 incubator for mammalian cell culture}
-\item \href{http://www.instructables.com/id/Biomonstaaar/}{Biomonstaaar: PBR instructable}, and \href{http://www.spacegambit.org/files/project_proposals/BioMONSTAAAR.pdf}{spacegambit project proposal}
-\item \href{http://www.openbioreacteurs.org/wiki/introduction/}{Openbioreacteurs: DIY algae reactors}
-\end{itemize}
-\paragraph{3D Printed Labware and Bioreactors:}
-\begin{itemize}
-\item \href{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4641590/}{Tsuda \textit{et al.} PLoS ONE 2015: 3D Printed 'Plug and Play' Millifluidic Devices}
-\item \href{http://onlinelibrary.wiley.com/doi/10.1002/elsc.201400093/abstract}{L\"ucking \textit{et al.} Eng. Life Sci. 2015: 3D printed labware, incl. ``well plate with different baffle geometries, shake flask cap with built-in luer connections, and filter holder for an in-house developed membrane reactor system''}; also see \href{http://jbioleng.biomedcentral.com/articles/10.1186/1754-1611-8-18}{paper by B\"uchs group on baffle geometries}
-\item \href{http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002086}{Baden \textit{et al.} PLoS ONE 2015: Open Labware: 3-D Printing Your Own Lab Equipment}
-\end{itemize}
-
-\paragraph{Designs \& Instructions:}
-\begin{itemize}
-\item \href{http://playground.arduino.cc/}{Arduino Playground}: Wiki for Arduino-based Designs
-\item \href{http://www.instructables.com/}{Instructables}: Diverse DIY Designs
-\item \href{https://www.thingiverse.com/}{Thingiverse}: 3D Printer Designs
-\end{itemize}
-
-\paragraph{Shops:}
-\begin{itemize}
-\item \href{https://www.conrad.de/de/bauelemente-t04.html}{Conrad}: online and offline shop, DE
-\item \href{http://www.elecrow.com/}{Elecrow}: online shop, China
-\item \href{https://www.adafruit.com/}{Adafruit}: online shop, USA
-\item \href{https://www.fasttech.com/}{Fasttech}: online shop, China
-\end{itemize}
+%\paragraph{DIY Bioreactors:}
+%\begin{itemize}
+%\item \href{http://www.yo-que.ch/nmrlab/mediawiki-1.15.1/index.php/Bioreactor}{Open source DIY bioreactor} and its \href{https://github.com/bioreactor}{code on github}
+%\item \href{https://github.com/Bioreactor/Code-Bioreactor}{Github project for Arduino-controlled bioreactor}
+%\item \href{http://onlinebioreactor.org/}{Onlinebioreactor: Arduino wiring schematics and source code for a temperature and pH measurements of a bioreactor}
+%\item \href{http://www.instructables.com/id/An-Algae-Bioreactor-from-Recycled-Water-Bottles/}{An Algae Bioreactor from Recycled Water Bottles}
+%\item \href{https://groups.google.com/forum/#!msg/diybio/j1oucFRuPUk/zz1Y_gE0PJkJ}{Google Group: DIY Bioreactor and Bioreactor controller}
+%\item \href{http://jun.ucsd.edu/mother_machine.php}{The Jun lab's Mother Machine}
+%\item \href{http://www.pellinglab.net/diy/diyco2incubator/}{Pelling lab's CO2 incubator for mammalian cell culture}
+%\item \href{http://www.instructables.com/id/Biomonstaaar/}{Biomonstaaar: PBR instructable}, and \href{http://www.spacegambit.org/files/project_proposals/BioMONSTAAAR.pdf}{spacegambit project proposal}
+%\item \href{http://www.openbioreacteurs.org/wiki/introduction/}{Openbioreacteurs: DIY algae reactors}
+%\end{itemize}
+%\paragraph{3D Printed Labware and Bioreactors:}
+%\begin{itemize}
+%\item \href{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4641590/}{Tsuda \textit{et al.} PLoS ONE 2015: 3D Printed 'Plug and Play' Millifluidic Devices}
+%\item \href{http://onlinelibrary.wiley.com/doi/10.1002/elsc.201400093/abstract}{L\"ucking \textit{et al.} Eng. Life Sci. 2015: 3D printed labware, incl. ``well plate with different baffle geometries, shake flask cap with built-in luer connections, and filter holder for an in-house developed membrane reactor system''}; also see \href{http://jbioleng.biomedcentral.com/articles/10.1186/1754-1611-8-18}{paper by B\"uchs group on baffle geometries}
+%\item \href{http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002086}{Baden \textit{et al.} PLoS ONE 2015: Open Labware: 3-D Printing Your Own Lab Equipment}
+%\end{itemize}
+%
+%\paragraph{Designs \& Instructions:}
+%\begin{itemize}
+%\item \href{http://playground.arduino.cc/}{Arduino Playground}: Wiki for Arduino-based Designs
+%\item \href{http://www.instructables.com/}{Instructables}: Diverse DIY Designs
+%\item \href{https://www.thingiverse.com/}{Thingiverse}: 3D Printer Designs
+%\end{itemize}
+%
+%\paragraph{Shops:}
+%\begin{itemize}
+%\item \href{https://www.conrad.de/de/bauelemente-t04.html}{Conrad}: online and offline shop, DE
+%\item \href{http://www.elecrow.com/}{Elecrow}: online shop, China
+%\item \href{https://www.adafruit.com/}{Adafruit}: online shop, USA
+%\item \href{https://www.fasttech.com/}{Fasttech}: online shop, China
+%\end{itemize}
 
 \newpage
+\section{PBR \hack{} Projects}
+\label{proj}
+
 \subsection{Gas Flux: \gasometer{}}
 \label{gas}
 \paragraph{Project:} 
@@ -212,12 +276,15 @@ Simple spectrometric measuring tool based on
   online recording
 \end{enumerate}
 
+
 \paragraph{Resources:}
 \begin{itemize}
 \item
   \href{http://www.avantes.com/images/productsheets/AvaSpec_Mini5.pdf}{AvaSpec-Mini
     data sheet} in \texttt{code/manuals/light/} at the \git{}
-\item \href{http://www.avantes.com/products/oem/item/220-oem-spectrometers-as5216-microprocessor-board}{The AS5216 microprocessor board} - a lib file for Raspberry Pi model 1 B+ is available in \texttt{code/light/}
+\item \href{http://www.avantes.com/products/oem/item/220-oem-spectrometers-as5216-microprocessor-board}{The AS5216 microprocessor board} - lib for Rasp. Pi 1 B+ at \texttt{code/light/}
+\item \href{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4641590/}{Tsuda
+    \textit{et al.} PLoS ONE 2015}: 3D printed casing for OD measurement
 \end{itemize}
 
 \paragraph{Materials:}
@@ -230,14 +297,14 @@ Simple spectrometric measuring tool based on
   SMA terminations, metal protection sleeves
 \item Raspberry Pi Version 1 Model B+: \obtain{}
 \item LED system: use PSI LEDs or \obtain{}
-\item Reactor probe: \build{} together with fine mechanics or glas
+\item Reactor probe: \build{}; 3D print and/or fine mechanics and glas
   blowers
 \end{itemize}
 
 \begin{figure}[ht]
   \begin{minipage}{.49\textwidth}
     \subfloat[AvaSpec-Mini 2048]{
-      \includegraphics[width=.8\textwidth]{figures/avaspec-mini.png}
+      \includegraphics[width=.7\textwidth]{figures/avaspec-mini.png}
     }
   \end{minipage}
   \begin{minipage}{.49\textwidth}
@@ -431,63 +498,6 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 
 
 \newpage
-
-\section{Program}
-
-\subsection{Day 1 $<$12:00 : Building Bioreactors}
-
-Talks, 30-60 min:
-\begin{itemize}
-\item Rob's DIY Reactor - The Beginnings: \texttt{NinjaPBR} -
-  Arduino-controlled mini PBR
-\item Dougie's DIY Reactor - 20 yrs Later
-\item Avantes - Spectrometry: Spectrometry applications, incl. NIR for
-  metabolite measurements and OD; software interface to Avantes
-  spectrometers
-\item CellDeg - Optimizing Photosynthetic Growth: Introduction to
-  CellDeg's 2.5 k Euro algal growth setup (30 g/L cyano
-  biomass in three days)
-\end{itemize}
-
-
-\subsection{Day 1 $>$13:00 : \hack{} I}
-
-\begin{itemize}
-\item Introduction to the \gasometer{}: connecting sensors with Arduino,
-  making an autonomous measurement device via Sainsmart's Touch Screen
-\item Introduction to Rob's reactor: complete setup for photosynthetic growth
-\item Self-organizing into teams: lab hardware (tubing etc.), control hardware
-(soldering etc.), software and/or by by projects (\ref{gas}--\ref{micro}) 
-\end{itemize}
-
-\subsection{Day 2 : \hack{} II}
-
-%Perhaps in teams, either by projects (\ref{gas}--\ref{micro}) or in
-%software vs. hardware (soldering/tubing) vs. biolab (cell cultures),
-%or -- most likely -- in dynamic self-organisation, working parallel on
-%all projects.
-
-\begin{itemize}
-\item Hardware I: soldering, tubing
-\item Software I: probe/sensor/pump $\Leftrightarrow$ arduino/raspi interfaces
-\item Visit HHU's fine mechanics and glas blower work-shops, place
-  orders for stuff missing for above goals
-\end{itemize}
-
-\subsection{Day 3 : \hack{} III}
-
-\begin{itemize}
-\item Hardware II: Integrate projects \ref{gas},\ref{spec}\&\ref{cult}
-  into a simple DIY reactor and/or with PSI FMT150 or Multicultivator
-%\item 
-%\end{itemize}
-%\subsection{Day 3 $>$13:00 : Consolidating}
-%\begin{itemize}
-\item Software II: arduino/raspi $\Leftrightarrow$  master/server interface\\
-  Standard data formats and interfaces
-\item Brain storming: relation of data and models and beer
-%\item Beer: relation of data and models and beer
-\end{itemize}
 
 \subsection{Participants \& Teams}
 
