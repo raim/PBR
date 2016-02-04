@@ -409,12 +409,15 @@ routine
 desktop that synchronizes and speaks via a comon interface to all
 Arduino and Raspberry Pi modules; the modules themselves can interpret
 get, set and act impulses (use arguments only when absolutely
-necessary).\\
-During an initializiation the server may inquire what an
-attached module provides (\textit{via} data IDs and SI units, meaningful
-time resolution) and handle it automatically. \\
-Variable higher order control or processing logics can be built
-using defined data and control IDs.
+necessary).\\ During an initializiation the server may inquire what an
+attached module provides (\textit{via} data IDs and SI units,
+meaningful time resolution) and handle it automatically. \\ Variable
+higher order control or processing logics can be built using defined
+data and control IDs. Ultimately, a direct integration with
+mathematical models may be desirable.  For example, measured \ox{} and
+\cox{} levels may be used to estimate metabolic activities, such as
+catabolic ATP/ADP turnover; required data and equations can be loaded
+and interpreted \textit{via} SBML encoded models.
 \begin{enumerate}
 \item \build{} combine of gas (\ref{gas}), liquid (\ref{cult})
   and light (\ref{spec}) modules into a bioreactor
@@ -422,6 +425,8 @@ using defined data and control IDs.
   the three modules
 \item \code{}: combine e.g. \ref{spec} \& \ref{cult} to implement
   turbidostat control
+\item \code{}: higher order data evaluation logics, \textit{eg.}, estimate
+  metabolic rates from gas exchange measurements
 \end{enumerate}
 
 
