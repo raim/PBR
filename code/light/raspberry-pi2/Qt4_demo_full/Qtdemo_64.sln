@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Qtdemo_64", "Qtdemo_64.vcproj", "{00226F29-32B2-3225-A2ED-FE08DDCC0C26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00226F29-32B2-3225-A2ED-FE08DDCC0C26}.Debug|Win32.ActiveCfg = Debug|Win32
+		{00226F29-32B2-3225-A2ED-FE08DDCC0C26}.Debug|Win32.Build.0 = Debug|Win32
+		{00226F29-32B2-3225-A2ED-FE08DDCC0C26}.Release|Win32.ActiveCfg = Release|Win32
+		{00226F29-32B2-3225-A2ED-FE08DDCC0C26}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+EndGlobal
