@@ -14,7 +14,7 @@ see http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG
 |-------|-------|------|
 | GND   | brown | GND  |
 | DT    | red   | A1   |
-| SCK   | ornge | A0   |
-| VCC   | yello | 5V   | 
+| SCK   | orange| A0   |
+| VCC   | yellow| 5V   | 
 
 3) upload code: scale/scale.ino
