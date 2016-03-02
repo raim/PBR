@@ -1,3 +1,4 @@
+# Open and Modular Photobioreactor for Quantiative and Theoretical Biology
 
 Code repository for a modular photobioreactor, based on arduino
 and raspberry pi controlled sensor and control devices. 
