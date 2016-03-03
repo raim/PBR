@@ -13,8 +13,13 @@ see http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG
 | SCALE | cable | MEGA |
 |-------|-------|------|
 | GND   | brown | GND  |
-| DT    | red   | A1   |
-| SCK   | orange| A0   |
+| DT    | red   | A9   |
+| SCK   | orange| A8   |
 | VCC   | yellow| 5V   | 
 
-3) upload code: scale/scale.ino
+NOTE: 5V and GND via motor shield
+
+3) Connect 12V 5000 rpm DC motor/peristaltic pump to motor shield channel A
+
+
+
