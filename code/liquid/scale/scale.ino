@@ -3,7 +3,7 @@
 
 #include "hx711.h"
 
-Hx711 scale(A1, A0);
+Hx711 scale(A9, A8);
 
 void setup() {
 
