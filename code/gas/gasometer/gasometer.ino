@@ -426,7 +426,7 @@ void setup() {
   
   // TODO: proper error handling
 
-  Serial.begin(9600);  //Start Serial connection with host 
+  Serial.begin(9600);  // Start Serial connection with host 
        
   // initializing the touch screen
   setupScreen(); 
