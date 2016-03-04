@@ -1,7 +1,7 @@
 
 # GASOMETER
 
-## Touchscreen
+## Sainsmart Touchscreen SSD1289 
 
 Download required libraries UTFT [1] and UTouch [2] 
 and either unzip to your Arduino libraries folder
@@ -35,3 +35,9 @@ Pin connections sensor to arduino
 
 NOTE: the test code says "connect a 10K resistor from pin 2 (data) to pin 1 
 (power) of the sensor"
+
+## Aalborg XFM Mass Flow Meter
+
+TODO: uses RS485; buy TTL-to-RS485 Arduino module
+
+
