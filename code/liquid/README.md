@@ -17,13 +17,13 @@ see http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG
 
 | SCALE | cable | MEGA |
 |-------|-------|------|
-| GND   | brown | GND  |
+| GND   | white | GND  |
 | DT    | red   | A9   |
 | SCK   | orange| A8   |
-| VCC   | yellow| 5V   | 
+| VCC   | green | 5V   | 
+from right to left on scale
 
-NOTE: 5V and GND via motor shield; TODO: make 3-way branching connector
-between motor shield and arduino
+TODO: make proper connections to 5V and Gnd pins of the motor shield
 
 ## Peristaltic Pump
 
