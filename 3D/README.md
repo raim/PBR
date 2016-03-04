@@ -1,5 +1,9 @@
 # STL and CAD Files for 3D Printer
 
+## Stepper-motor controlled Syringe Pump
+
+TODO: after (https://hackaday.io/project/1838-open-syringe-pump)
+
 ## OD_probe_withouthole.stl and OD_probe_withhole.stl
 
 Obtained from Soichiro Tsuda and Lee Cronin, from Fig. 2a of 
