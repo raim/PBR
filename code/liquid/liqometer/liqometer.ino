@@ -10,6 +10,8 @@
 
 
 // HX711 SCALE
+// TODO: choose https://github.com/bogde/HX711 or https://github.com/aguegu/ardulibs/tree/master/hx711
+// TODO: add calibration routine as described in README.md of above projects
 #include "hx711.h"
 Hx711 scale(A9, A8); // scale on analog pins A8 (SCK) and A9 (DT/DOUT)
 
