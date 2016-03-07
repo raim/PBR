@@ -1,0 +1,7 @@
+MATERIALS:
+
+* O2: UV Flux 25% Oxygen Sensor Module; CM-0101 or CM-0202 (SDK) and CM-0203
+* CO2: COZIR Wide Range CO2 Sensor, 0-5%; GC-0015 or GC-0124 (SDK) and CM-0013
+* fittings, filters, tubings: CM-0101
+* USB port
+* Windows laptop
