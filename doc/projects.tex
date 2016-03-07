@@ -112,7 +112,10 @@ can measure cellular activity. Perhaps add valve control to measure
 multiple reactors in series.
 
 \begin{enumerate}
-\item connect COZIR and UV Flux probes to Arduino Mega's Tx/Rx pins
+\item \build{}: COZIR and UV Flux probes to Arduino Mega's Tx/Rx pins,
+  solder 5V/3.3V and Gnd connections to touchscreen shield; \code{}:
+  display of measurement values on screen, and optional ``record
+  data'' mode to store data on the SD card of the touchscreen
 \item \build{} water trap, tubing path from reactor, and casing for
   sensors and Arduino; \build{} improved gassing system (glas
   blowers!) to allow lower flow
@@ -207,13 +210,13 @@ Simple spectrometric measuring tool based on
 
 \paragraph{Materials:}
 \begin{itemize}
-\item AvaSpec-Mini2048l-V25, Minispectrometer: \avail{}\\ Mini
+\item AvaSpec-Mini2048l-V25, Minispectrometer:\\ Mini
   spectrometer, 2048 Large pixels, grating-MN0600-0.50 (350-885nm),
   OSC, 25\textmu{}m slit, USB2 interface, AvaSoft-Basic
 \item Fiber optic cables, VIS/NIR: 1 m, 200 \textmu{}m VIS/NIR and 1m,
-  600 \textmu{}m: \avail{}\\
+  600 \textmu{}m
   SMA terminations, metal protection sleeves
-\item Raspberry Pi Version 1 Model B+: \obtain{}
+\item Raspberry Pi Version 1 Model B+ or Version 2 (libs for both available) 
 \item LED system: use PSI LEDs or \obtain{}
 \item Reactor probe: \build{}; 3D print and/or fine mechanics and glas
   blowers
@@ -380,13 +383,13 @@ storage containers)
 
 \paragraph{Materials:}
 \begin{itemize}
-\item Sterile sampling device by HHU glas blowers: \avail{}
-\item Syringe pump: \obtain{}
+\item Sainsmart's Arduino Mega \& Touchscreen
+\item Sterile sampling device by HHU glas blowers
 \item 12V Nema17 Stepper Motor 45oz,0.4A,34mm for 3D printer CE (as in ultimaker2):\\
   \href{http://www.ebay.com/itm/251604407772?_trksid=p2055119.m1438.l2649&ssPageName=STRK\%3AMEBIDX\%3AIT}{via act motor}
-  
-\item \texttt{Kaiten Eppi}: \build{}
-\item Sainsmart's Arduino Mega \& Touchscreen: \obtain{}
+\item Plastic syringe pump + 3D-printed holder for pump and motor
+\item \texttt{Kaiten Eppi}: \build{} a circular tube-holder, run by a
+  stepper motor (same as above for pump)
 \end{itemize}
 
 
