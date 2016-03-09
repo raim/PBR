@@ -7,31 +7,37 @@
 // additional volume of a reactor as dilution rate 1/h.
 
 #include <Time.h> // convert times (day, hours, minutes, seconds)
+#include <UTFT.h> // Display
+#include <UTouch.h> // Touchscreen
+#include <SPI.h> // dunno
+#include <SD.h> // SD Memory Card
+#include "hx711.h" // scale
+
+// TIME
+time_t t; // time in milliseconds
+double wght=0;   // weight in gram
 
 
 // HX711 SCALE
 // TODO: choose https://github.com/bogde/HX711 or https://github.com/aguegu/ardulibs/tree/master/hx711
 // TODO: add calibration routine as described in README.md of above projects
-#include "hx711.h"
 Hx711 scale(A9, A8); // scale on analog pins A8 (SCK) and A9 (DT/DOUT)
 
-// 12V 5000 rpm DC MOTOR/PERISTALTIC PUMP
+// MOTOR: 12V 5000 rpm DC MOTOR/PERISTALTIC PUMP
 // PIN CONNECTIONS - channel A
 const int pwmA = 10;  // motor speed via PWM pin 10 (re-routed from 3!)
 const int brkA = 9;   // motor brake  
 const int dirA = 12;  // motor direction
 
 
-// TOUCHSCREEN
-#include <UTFT.h> // Display
-#include <UTouch.h> // Touchscreen
-#include <SPI.h> // dunno
-#include <SD.h> // SD Memory Card
+// SD CARD
 #define SD_CS_PIN 53 // DEFINE SD CARD PIN
+Sd2Card card;
 File myFile;  // File on the SD Card
 bool RECORD = false; // record data on SD Card?
 String clrLne = "                        "; // to clear complete lines
 
+// TOUCHSCREEN
 // Initialize display
 UTFT    myGLCD(SSD1289,38,39,40,41);
 // Initialize touchscreen
@@ -164,13 +170,7 @@ void setupSDCard() {
   if ( myFile ) {
     myFile.print("Time[ms]");
     myFile.print(' ');
-    myFile.print("CO2[ppm]");
-    myFile.print(' ');
-    myFile.print("O2[bar]");
-    myFile.print(' ');
-    myFile.print("P[bar]");
-    myFile.print(' ');
-    myFile.print("T[C]");
+    myFile.print("weight[g]");
     myFile.print('\n');
     myFile.close();
   }
@@ -190,7 +190,15 @@ void setup() {
   Serial.begin(9600);// Start Serial connection with host 
        
   // TOUCH SCREEN
-  // setupScreen(); 
+  // initializing the touch screen
+  setupScreen(); 
+
+  myGLCD.print("Initializing", CENTER, 32);
+  myGLCD.print("SD Card", CENTER, 64);
+  setupSDCard(); // NOTE: this also writes a header to the data file
+
+  myGLCD.print("Initializing", CENTER, 32);
+  myGLCD.print(" Motor ", CENTER, 64);
 
   // MOTOR - TODO: replace by code/sampler/stepper
   // setup Channel A
@@ -206,9 +214,15 @@ void setup() {
 
   // SCALE - simply get weight
   // TODO: tare routine?
+  myGLCD.print("Initializing", CENTER, 32);
+  myGLCD.print(" Scale ", CENTER, 64);
   Serial.print(scale.getGram(), 1);
   Serial.println(" g");
-
+  
+  //Serial.print("Calibrating scale: ");
+  //scale.set_scale();
+  //scale.tare();
+  //Serial.println(scale.get_units(10));
   // TODO: show weight and relative pump speed
   // +/- buttons for pump speed
   // calculate current rate from data on SD-CARD
@@ -220,15 +234,25 @@ void setup() {
 void loop() {
 
   // get weight 
-  Serial.print(scale.getGram(), 1);
+   Serial.print(scale.getGram(), 1);
+ //Serial.print(scale.get_units(10));
   Serial.println(" g");
+
+  t = millis();
+  wght = scale.getGram();
+  
+  // PRINT VALUES TO SCREEN
+  myGLCD.print("Time [sec]:          ", LEFT, 16);
+  myGLCD.printNumI(round(t/1000), RIGHT, 16);
+  myGLCD.print("weight [g]:          ", LEFT, 32);    
+  myGLCD.printNumF(wght, 0, RIGHT, 32);
 
   // change motor speed
   Serial.println("fast"); 
-  analogWrite(pwmA, 500);      //Spins the motor on Channel A at full speed
-  delay(2000);
-  Serial.println("slow"); 
-  analogWrite(pwmA, 50);      //Spins the motor on Channel A at full speed
-  delay(2000);
+  //analogWrite(pwmA, 500);      //Spins the motor on Channel A at full speed
+  //delay(2000);
+  //Serial.println("slow"); 
+  //analogWrite(pwmA, 50);      //Spins the motor on Channel A at full speed
+  //delay(2000);
 
 }
