@@ -19,7 +19,8 @@ double wght=0;   // weight in gram
 
 
 // HX711 SCALE
-// TODO: choose https://github.com/bogde/HX711 or https://github.com/aguegu/ardulibs/tree/master/hx711
+// TODO: choose https://github.com/bogde/HX711 or
+//              https://github.com/aguegu/ardulibs/tree/master/hx711
 // TODO: add calibration routine as described in README.md of above projects
 Hx711 scale(A9, A8); // scale on analog pins A8 (SCK) and A9 (DT/DOUT)
 

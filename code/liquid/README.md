@@ -11,6 +11,11 @@ a peristaltic pump and a scale.
 wget http://www.elecrow.com/wiki/images/2/25/Hx711.zip
 (sketch > include library > add .zip library ...)
 
+Or use more recent libraries:
+https://github.com/Bodmer/TFT_HX8357
+https://github.com/Bodmer/TFT_HX8357/archive/master.zip
+https://github.com/aguegu/ardulibs/tree/master/hx711
+
 2) Connect SEN003KGK to Arduino Mega
 
 see http://www.elecrow.com/wiki/index.php?title=Weight_Sensor_Scales_Kit-_20KG
@@ -60,7 +65,4 @@ TODO:  get SD card
 
 NOT USED FOR MODULE - no touchscreen!
 
-Download dedicated library:
-https://github.com/Bodmer/TFT_HX8357
-https://github.com/Bodmer/TFT_HX8357/archive/master.zip
 
