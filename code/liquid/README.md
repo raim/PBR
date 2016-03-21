@@ -41,13 +41,19 @@ peristaltic pump
 same as used for code/gas/gasometer
 
 RE-WIRING:
+
 Pin 3 of the Mega is used by both touchscreen and motor shields.
 Thus we need to connect the free pin 10 via an external cable
 to pin 3 of the motor shield, and use another cable to connect
 the DOUT pin of the touchscreen shield to pin 3 of the Arduino.
+To connect the touchscreen shield to the Arduino Mega Board use
+two 2x13 or one 2x20 pin stacking headers for Raspberry Pi (Model B+)
+with extra long pins! The 2x13 option requires to file off a bit
+of the plastic where the two stacking headers touch. The Touchscreen-Mega
+connection requires 2x18 pins, so the 2x20 option is the best and
+least work-intensive.
 
-TODO: buy 2 Stiftleisten, should connect Arduino and touchscreen
-shield; buy SD card
+TODO:  get SD card
 
 
 ## OUTDATED: LCD Screen HX8357B 
