@@ -86,3 +86,7 @@ TODO:  get SD card
 NOT USED FOR MODULE - no touchscreen!
 
 
+## TODO
+
+* don't wait for scale, but ask whether a value is ready?
+* start/stop buttons for motor (additionally to +/-
