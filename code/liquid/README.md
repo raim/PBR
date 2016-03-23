@@ -24,10 +24,10 @@ WIRING
 
 | SCALE | cable | MEGA |
 |-------|-------|------|
-| GND   | white | GND  |
+| GND   | grey  | GND  |
 | DT    | red   | A9   |
 | SCK   | orange| A8   |
-| VCC   | green | 5V   | 
+| VCC   | blue  | 5V   | 
 from right to left on scale
 
 
