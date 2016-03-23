@@ -203,7 +203,7 @@ void setupSDCard() {
   if ( myFile ) {
     myFile.print("Time[ms]");
     myFile.print(' ');
-    myFile.print("weight[g]");
+    myFile.print("Weight[g]");
     myFile.print('\n');
     myFile.print("Speed[V]");
     myFile.print('\n');
@@ -310,7 +310,7 @@ void loop() {
       // if the file didn't open, print an error:
       Serial.println("error opening data.txt");
       myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
-      myGLCD.print("ERROR WRITING FILE", CENTER, 192);
+      myGLCD.print("ERROR WRITING FILE", CENTER, 105);
     }
   }
 
@@ -357,7 +357,5 @@ void loop() {
 	drawMotorButtons(); // draw buttons in idle mode (white)
       } 
     }
-
   }
-
 }
