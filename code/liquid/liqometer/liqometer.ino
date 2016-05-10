@@ -29,6 +29,7 @@ Hx711 scale(A9, A8); // scale on analog pins A8 (SCK) and A9 (DT/DOUT)
 const int pwmA = 10;  // motor speed via PWM pin 10 (re-routed from 3!)
 const int brkA = 9;   // motor brake  
 const int dirA = 12;  // motor direction
+int speed = 0; // motor speed
 
 
 // SD CARD
@@ -57,10 +58,24 @@ int stp_x1, stp_x2, stp_y1, stp_y2;
 **  UTILITY FUNCTIONS   **
 *************************/
 
-// buttons in idle mode (not recording)
-void drawButtons() {
+// buttons to control motor
+void drawMotorButtons() {
   // Record and Stop Buttons
   // TODO: define x,y positions of buttons as variables
+  myGLCD.setBackColor(0, 0, 255);
+  myGLCD.setColor(0, 0, 255);
+  myGLCD.fillRoundRect(10, 180, 150, 230);
+  myGLCD.setColor(255, 255, 255);
+  myGLCD.drawRoundRect(10, 180, 150, 230);
+  myGLCD.print("-", 80, 197);
+
+  myGLCD.setColor(0, 0, 255);
+  myGLCD.fillRoundRect(160, 180, 300, 230);
+  myGLCD.setColor(255, 255, 255);
+  myGLCD.drawRoundRect(160, 180, 300, 230);
+  myGLCD.print("+", 230, 197);
+  myGLCD.setBackColor (0, 0, 0);
+
   myGLCD.setBackColor(0, 0, 255);
   myGLCD.setColor(0, 0, 255);
   myGLCD.fillRoundRect(10, 130, 150, 180);
@@ -77,17 +92,34 @@ void drawButtons() {
 }
 // buttons in recording mode
 void drawRecButtons() {
-  // Record and Stop Buttons; as above but simply "Record" in red
+ 
+  // Record and Stop Buttons
+  // TODO: define x,y positions of buttons as variables
   myGLCD.setBackColor(0, 0, 255);
   myGLCD.setColor(0, 0, 255);
-  myGLCD.fillRoundRect (10, 130, 150, 180);
-  myGLCD.setColor(255, 0, 0);
-  myGLCD.drawRoundRect (10, 130, 150, 180);
-  myGLCD.print("Record", 40, 147);
-  myGLCD.setColor(0, 0, 255);
-  myGLCD.fillRoundRect (160, 130, 300, 180);
+  myGLCD.fillRoundRect(10, 180, 150, 230);
   myGLCD.setColor(255, 255, 255);
-  myGLCD.drawRoundRect (160, 130, 300, 180);
+  myGLCD.drawRoundRect(10, 180, 150, 230);
+  myGLCD.print("-", 80, 197);
+
+  myGLCD.setColor(0, 0, 255);
+  myGLCD.fillRoundRect(160, 180, 300, 230);
+  myGLCD.setColor(255, 255, 255);
+  myGLCD.drawRoundRect(160, 180, 300, 230);
+  myGLCD.print("+", 230, 197);
+  myGLCD.setBackColor (0, 0, 0);
+
+  myGLCD.setBackColor(0, 0, 255);
+  myGLCD.setColor(0, 0, 255);
+  myGLCD.fillRoundRect(10, 130, 150, 180);
+  myGLCD.setColor(255, 0, 0);
+  myGLCD.drawRoundRect(10, 130, 150, 180);
+  myGLCD.print("Record", 40, 147);
+
+  myGLCD.setColor(0, 0, 255);
+  myGLCD.fillRoundRect(160, 130, 300, 180);
+  myGLCD.setColor(255, 255, 255);
+  myGLCD.drawRoundRect(160, 130, 300, 180);
   myGLCD.print("Stop", 190, 147);
   myGLCD.setBackColor (0, 0, 0);
 }
@@ -171,7 +203,9 @@ void setupSDCard() {
   if ( myFile ) {
     myFile.print("Time[ms]");
     myFile.print(' ');
-    myFile.print("weight[g]");
+    myFile.print("Weight[g]");
+    myFile.print('\n');
+    myFile.print("Speed[V]");
     myFile.print('\n');
     myFile.close();
   }
@@ -209,16 +243,16 @@ void setup() {
   // test run motor
   digitalWrite(dirA, HIGH);  //Establishes forward direction of Channel A
   digitalWrite(brkA, LOW);   //Disengage the Brake for Channel A
-  analogWrite(pwmA, 500);    //Spins the motor on Channel A at full speed
-  delay(5000);
-  analogWrite(pwmA, 100);      //Spins the motor on Channel A at full speed
+  analogWrite(pwmA, 255/2);  //Spins the motor on Channel A at half speed
+  delay(500);
+  analogWrite(pwmA, 0);  //switch off the motor on Channel A 
 
   // SCALE - simply get weight
   // TODO: tare routine?
   myGLCD.print("Initializing", CENTER, 32);
   myGLCD.print(" Scale ", CENTER, 64);
-  Serial.print(scale.getGram(), 1);
-  Serial.println(" g");
+  //Serial.print(scale.getGram(), 1);
+  //Serial.println(" g");
   
   //Serial.print("Calibrating scale: ");
   //scale.set_scale();
@@ -226,34 +260,102 @@ void setup() {
   //Serial.println(scale.get_units(10));
   // TODO: show weight and relative pump speed
   // +/- buttons for pump speed
+  //drawButtons();  
+  drawMotorButtons();  
+
   // calculate current rate from data on SD-CARD
   // display pump speed depending on available calibrations
   
+  // and clear text lines
+  myGLCD.print(clrLne, LEFT, 16);
+  myGLCD.print(clrLne, LEFT, 32);
+  myGLCD.print(clrLne, LEFT, 48);
+  myGLCD.print(clrLne, LEFT, 64);
+  myGLCD.print(clrLne, LEFT, 80);
+  myGLCD.print(clrLne, LEFT, 96);
 
 }
 
 void loop() {
 
   // get weight 
-   Serial.print(scale.getGram(), 1);
- //Serial.print(scale.get_units(10));
-  Serial.println(" g");
+  //Serial.print(scale.getGram(), 1);
+  //Serial.print(scale.get_units(10));
+  //Serial.println(" g");
 
-  t = millis();
   wght = scale.getGram();
+  t = millis();
   
   // PRINT VALUES TO SCREEN
   myGLCD.print("Time [sec]:          ", LEFT, 16);
   myGLCD.printNumI(round(t/1000), RIGHT, 16);
-  myGLCD.print("weight [g]:          ", LEFT, 32);    
+  myGLCD.print("Weight [g]:          ", LEFT, 32);    
   myGLCD.printNumF(wght, 0, RIGHT, 32);
+  myGLCD.print("Speed  [V]:          ", LEFT, 48);    
+  myGLCD.printNumI(speed, RIGHT, 48);
 
-  // change motor speed
-  Serial.println("fast"); 
-  //analogWrite(pwmA, 500);      //Spins the motor on Channel A at full speed
-  //delay(2000);
-  //Serial.println("slow"); 
-  //analogWrite(pwmA, 50);      //Spins the motor on Channel A at full speed
-  //delay(2000);
 
+  // WRITE DATA TO FILE
+  if ( RECORD ) {
+    myFile = SD.open("data.txt", FILE_WRITE);
+    if ( myFile ) {
+      myFile.print(t);
+      myFile.print(' ');
+      myFile.print(wght);
+      myFile.print(' ');
+      myFile.print(speed);
+      myFile.print('\n');
+      myFile.close();
+    } else {
+      // if the file didn't open, print an error:
+      Serial.println("error opening data.txt");
+      myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
+      myGLCD.print("ERROR WRITING FILE", CENTER, 105);
+    }
+  }
+
+
+  // CHECK BUTTONS
+  if ( myTouch.dataAvailable() ) {
+    myTouch.read();
+    x = myTouch.getX();
+    y = myTouch.getY();
+    // MOTOR SPEED
+    if ( (y>=180) && (y<=230) ) { // Button row 
+      if ( (x>=10) && (x<=150) ) { // Button: - speed up motor
+	waitForButton(10, 180, 150, 230);
+	speed = speed -10;
+      }
+      if ( (x>=160) && (x<=300) ) { // Button: + slow down motor
+	waitForButton(160, 180, 300, 230);
+	speed = speed +10;
+      } 
+    }
+    if ( speed > 255 ) speed = 255;
+    if ( speed < 0 ) speed = 0;
+    analogWrite(pwmA, speed);      //Spins the motor on Channel A at full speed
+    myGLCD.print("Speed  [V]:          ", LEFT, 48);    
+    myGLCD.printNumI(speed, RIGHT, 48);
+
+    // RECORD DATA
+    if ( (y>=130) && (y<=180) ) { // Button row 
+      if ( (x>=10) && (x<=150) ) { // Button: Record
+	waitForButton(10, 130, 150, 180);
+	RECORD = true;
+	drawRecButtons(); // draw buttons in recording mode (red)
+	myGLCD.setColor(255, 0, 0);
+	myGLCD.print("RECORDING DATA", CENTER, 110);
+	myGLCD.setBackColor(0, 0, 0);
+	myGLCD.setColor(255, 255, 255);
+      }
+      if ( (x>=160) && (x<=300) ) { // Button: Stop
+	waitForButton(160, 130, 300, 180);
+	RECORD = false;
+	myGLCD.setBackColor(0, 0, 0);
+	myGLCD.setColor(255, 255, 255);
+	myGLCD.print(clrLne, LEFT, 110); // clear error message line
+	drawMotorButtons(); // draw buttons in idle mode (white)
+      } 
+    }
+  }
 }
