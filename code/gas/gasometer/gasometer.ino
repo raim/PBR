@@ -8,6 +8,8 @@
 // Arduino Mega2560 + TFT Touch Screen + O2 and CO2 sensors from co2meter
 // MEASURES O2 and CO2 CONCENTRATION IN GAS
 
+// TODO 201612: calibrate probes!
+// TODO: add Aalborg mass flow meter at Tx3/Rx3 
 // TODO: implement calibration routine for CO2 probe 
 //       (see Manual-GSS-Sensors.pdf)
 // TODO: O2 values require correction PV=nRT 
