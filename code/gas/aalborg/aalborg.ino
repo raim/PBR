@@ -521,7 +521,7 @@ void loop() {
   Serial.println("# HALLO AALBORG TRANS??");
   Serial.println(avail);
   
-  Serial3.write("F\r\n"); // P for total pressure in bar
+  Serial3.write("F\r\n"); // F for receiving a value
 
   delay(100);  
 
