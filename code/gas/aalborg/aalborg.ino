@@ -49,11 +49,39 @@ double o2=0;    // oxygen in bar
 double P=0;     // pressure in bar
 double T =0;    // temperature in °C
 
+// AALBORG MASS FLOW METER
+// PROBLEMS: 
+// * led on rs485 chip lights up when setting ENABLE_BIN to
+// RECEIVE/LOW and only rs485 Vcc ist connected to Arduino, and
+// less bright when onlz Tx/Rx/enable pin are connected, BUT 
+// is constantly lid when rs485 ground is connected
+// to the arduino ground
+// * Serial3.available() returns TRUE when ENABLE_BIN is in RECEIVE
+// and ONLY hen neither Vcc nor Ground are connected
+// * Receiving some strange signal when connecting aalborg
+// ground to arduino ground
+String aaval= "make it a very long string in case it just was too short before"; //holds the strings retrieved from the sensor
 boolean avail = false;
 #define ENABLE_PIN 8
 #define TRANSMIT HIGH
 #define RECEIVE  LOW
 
+// callback functions for RS485 lib
+#include "RS485_protocol.h"
+void fWrite (const byte what)
+{
+  Serial3.write (what);  
+}
+
+int fAvailable ()
+{
+  return Serial3.available ();  
+}
+
+int fRead ()
+{
+  return Serial3.read ();  
+} 
 
 // TIME
 time_t t; // time in milliseconds
@@ -433,6 +461,20 @@ void setupMass() {
 
   // initialize transmit/receive switch on pin 13
   pinMode(ENABLE_PIN, OUTPUT);   
+  
+  digitalWrite(ENABLE_PIN, TRANSMIT);
+  delay(500);  
+
+  /* avail = Serial3.available(); */
+  /* Serial.println("# HALLO AALBORG TRANS??"); */
+  /* Serial.println(avail); */
+  
+  const byte msg[] = "!00,MW,7,12\r";
+  sendMsg(fWrite, msg, sizeof msg);
+
+  //Serial3.write("!00,MW,7,11\r"); // SET ADDRESS - TODO RM 
+  delay(1000);  
+  digitalWrite(ENABLE_PIN, RECEIVE);
 
   // set sensor to POLLING MODE 
   //Serial1.write("M 1\r\n"); // M=0 is streaming mode
@@ -500,42 +542,57 @@ void loop() {
   // get measurement time (init)
   t = millis(); //now(); // now() gives seconds
 
-  // get CO2 sensor values (Serial2)
-  co2 = getValue('Z', Serial2, multiplier, false); 
+  /* // get CO2 sensor values (Serial2) */
+  co2 = getValue('Z', Serial2, multiplier, false);
 
   // get O2 sensor values (Serial1)
-  o2 = getValue('O', Serial1, 1.0, false);  
-  T = getValue('T', Serial1, 1.0, false);  
-  P = getValue('P', Serial1, 1.0, false);  
+  o2 = getValue('O', Serial1, 1.0, false);
+  T = getValue('T', Serial1, 1.0, false);
+  P = getValue('P', Serial1, 1.0, false);
 
   // get average time
   // TODO: instead record actual times, e.g. directly in getValue?
   //       -> measure time passed
   t = (t+millis())/2; 
   
-  digitalWrite(ENABLE_PIN, HIGH);
-  delay(100);  
-  //digitalWrite(ENABLE_PIN, RECEIVE);
-
-  avail = Serial3.available();
-  Serial.println("# HALLO AALBORG TRANS??");
-  Serial.println(avail);
   
-  Serial3.write("F\r\n"); // F for receiving a value
+  myGLCD.print("   SEND TO AALBORG   ", CENTER, 192);
+  digitalWrite(ENABLE_PIN, TRANSMIT);
+  delay(660);
+  /* avail = Serial3.available(); */
+  /* Serial.print("# HALLO AALBORG TRANS: "); */
+  /* Serial.println(avail); */
+  /* Serial3.write("!11,F\r"); // F for receiving a value */
+  const byte msg[] = "!12,F\r\n";
+  sendMsg(fWrite, msg, sizeof msg);
+  delay(1000);  
+  digitalWrite(ENABLE_PIN, RECEIVE);
 
-  delay(100);  
+  myGLCD.print("RECEIVE FROM AALBORG", CENTER, 192);
+  /* delay(500); */
 
-  digitalWrite(ENABLE_PIN, LOW);
-
+  
   avail = Serial3.available();
-  Serial.println("# HALLO AALBORG REC??");
+  Serial.print("# HALLO AALBORG REC: ");
   Serial.println(avail);
+  /* aaval = "make it a very long string in case it just was too short before";//""; */
+  /* if ( Serial3.available() ) { */
+  /*   aaval = Serial3.readString(); */
+  /*   Serial.print("# flow rate direct:"); */
+  /*   Serial.print(aaval); */
+  /*   Serial.println("... done"); */
+  /* } */
+  /* myGLCD.print(aaval, CENTER, 204); */
 
-  val = Serial3.readStringUntil('\n');
-  Serial.println("# flow rate:");
-  Serial.println(val);
-  Serial.println("done");
-
+  byte buf [20];
+  byte received = recvMsg (fAvailable, fRead, buf, sizeof buf);
+  String myString = String((char *)buf);
+  String myString2 = String((char *)received);
+  Serial.print("# flow rate:"); 
+  Serial.print(myString); 
+  /* Serial.println("... done"); */
+  /* Serial.print(myString2);  */
+  Serial.println("... done");
 
   // PRINT VALUES TO SCREEN
   myGLCD.print("Time [sec]:          ", LEFT, 16);
