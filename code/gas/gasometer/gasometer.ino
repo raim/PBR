@@ -4,6 +4,13 @@
 #include <SPI.h> // dunno
 #include <SD.h> // SD Memory Card
 
+// RECALIB TOUCHSCREEN (by program UTouch_Calibration_raim
+// raim 20170228 - reset
+#define CAL_X 0x0036CF2CUL
+#define CAL_Y 0x03C7C12EUL
+#define CAL_S 0x000EF13FUL
+
+
 // GAS MEASUREMENT MODULE 
 // Arduino Mega2560 + TFT Touch Screen + O2 and CO2 sensors from co2meter
 // MEASURES O2 and CO2 CONCENTRATION IN GAS
@@ -54,7 +61,7 @@ time_t t; // time in milliseconds
 
 // delay - time for proper sensor management 
 // NOTE: currently not used, all works fine without
-int dly=0; // delay between write and read operations
+int dly=0; // delay between write and read operations (in millis!)
    
 // TOUCH SCREEN
 // The touch-screen Code is based on the UTouch_ButtonTest !
@@ -95,43 +102,41 @@ int stp_x1, stp_x2, stp_y1, stp_y2;
 *************************/
 
 
-// buttons in idle mode (not recording)
+
+// buttons 
 void drawButtons() {
   // Record and Stop Buttons
   // TODO: define x,y positions of buttons as variables
   myGLCD.setBackColor(0, 0, 255);
   myGLCD.setColor(0, 0, 255);
   myGLCD.fillRoundRect(10, 130, 150, 180);
-  myGLCD.setColor(255, 255, 255);
+  if ( RECORD ) 
+    myGLCD.setColor(255, 0, 0);
+  else 
+    myGLCD.setColor(255, 255, 255);
   myGLCD.drawRoundRect(10, 130, 150, 180);
-  myGLCD.print("Record", 40, 147);
+  if ( RECORD ) 
+    myGLCD.print(" STOP ", 30, 147);
+  else 
+    myGLCD.print("Record", 30, 147);
 
   myGLCD.setColor(0, 0, 255);
+  myGLCD.setBackColor(0, 0, 255);
   myGLCD.fillRoundRect(160, 130, 300, 180);
   myGLCD.setColor(255, 255, 255);
   myGLCD.drawRoundRect(160, 130, 300, 180);
-  myGLCD.print("Stop", 190, 147);
+  myGLCD.print("Calib", 190, 147);
+
+  
   myGLCD.setBackColor (0, 0, 0);
 }
-// buttons in recording mode
-void drawRecButtons() {
-  // Record and Stop Buttons; as above but simply "Record" in red
-  myGLCD.setBackColor(0, 0, 255);
-  myGLCD.setColor(0, 0, 255);
-  myGLCD.fillRoundRect (10, 130, 150, 180);
-  myGLCD.setColor(255, 0, 0);
-  myGLCD.drawRoundRect (10, 130, 150, 180);
-  myGLCD.print("Record", 40, 147);
-  myGLCD.setColor(0, 0, 255);
-  myGLCD.fillRoundRect (160, 130, 300, 180);
-  myGLCD.setColor(255, 255, 255);
-  myGLCD.drawRoundRect (160, 130, 300, 180);
-  myGLCD.print("Stop", 190, 147);
-  myGLCD.setBackColor (0, 0, 0);
-}
-// Draw a red frame while a button is touched
+
+// highlight button frame while a button is touched
 void waitForButton(int x1, int y1, int x2, int y2) {
-  myGLCD.setColor(255, 0, 0);
+  if ( RECORD )
+    myGLCD.setColor(255, 255, 255); // red -> white
+  else
+    myGLCD.setColor(255, 0, 0); // white -> red
   myGLCD.drawRoundRect (x1, y1, x2, y2);
   while (myTouch.dataAvailable())
     myTouch.read();
@@ -272,6 +277,15 @@ void setupSDCard() {
     myFile.print("T[C]");
     myFile.print('\n');
     myFile.close();
+
+    // activate record by default !!
+    RECORD = true;
+    drawButtons(); // draw buttons in recording mode (red)
+    myGLCD.setColor(255, 0, 0);
+    myGLCD.print("RECORDING", LEFT, 192);
+    myGLCD.setBackColor(0, 0, 0);
+    myGLCD.setColor(255, 255, 255);
+    
   }
   Serial.println("... done");
 }
@@ -341,6 +355,16 @@ void setupCO2() {
   Serial.println("... done");
 } 
 
+void calibrateCO2() {
+
+  // calibrating to CO2-free gas, usually nitrogen!
+  Serial2.write("U\r\n"); // G to calibrate to ambient air (440 ppm)
+  delay(dly); 
+  val = Serial2.readStringUntil('\n');
+  Serial.println(val);
+  myGLCD.print(val, RIGHT, 204);
+
+}
 
 void setupO2() { 
 
@@ -433,7 +457,7 @@ void setup() {
   // initializing the touch screen
   setupScreen(); 
 
-  myGLCD.print("Initializing", CENTER, 32);
+  myGLCD.print("Initializing", CENTER, 32); //NOTE: activates RECORD!
   myGLCD.print("SD Card", CENTER, 64);
   setupSDCard(); // NOTE: this also writes a header to the data file
 
@@ -496,6 +520,11 @@ void loop() {
   
   // WRITE DATA TO FILE
   if ( RECORD ) {
+    myGLCD.setColor(255, 0, 0);
+    myGLCD.print("RECORDING", LEFT, 192);
+    myGLCD.setBackColor(0, 0, 0);
+    myGLCD.setColor(255, 255, 255);
+
     myFile = SD.open("data.txt", FILE_WRITE);
     if ( myFile ) {
       myFile.print(t);
@@ -515,7 +544,9 @@ void loop() {
       myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
       myGLCD.print("ERROR WRITING FILE", CENTER, 192);
     }
-  }
+  } else {
+    myGLCD.print("         ", LEFT, 192);
+ }
     
   // CHECK BUTTONS
   if ( myTouch.dataAvailable() ) {
@@ -523,22 +554,27 @@ void loop() {
     x = myTouch.getX();
     y = myTouch.getY();
     if ( (y>=130) && (y<=180) ) { // Button row 
-      if ( (x>=10) && (x<=150) ) { // Button: Record
+      if ( (x>=10) && (x<=150) ) { // Button: Record/Stop
 	waitForButton(10, 130, 150, 180);
-	RECORD = true;
-	drawRecButtons(); // draw buttons in recording mode (red)
+	RECORD = !RECORD;
+	drawButtons(); // re-draw buttons 
 	myGLCD.setColor(255, 0, 0);
-	myGLCD.print("RECORDING DATA", CENTER, 192);
+	if ( RECORD )
+	  myGLCD.print("RECORDING", LEFT, 192);
+	else 
+	  myGLCD.print("         ", LEFT, 192);
 	myGLCD.setBackColor(0, 0, 0);
 	myGLCD.setColor(255, 255, 255);
       }
-      if ( (x>=160) && (x<=300) ) { // Button: Stop
+      if ( (x>=160) && (x<=300) ) { // Button: CALIBRATE
 	waitForButton(160, 130, 300, 180);
-	RECORD = false;
-	myGLCD.setBackColor(0, 0, 0);
-	myGLCD.setColor(255, 255, 255);
-	myGLCD.print(clrLne, LEFT, 192); // clear error message line
-	drawButtons(); // draw buttons in idle mode (white)
+	myGLCD.print("            CALIBRATING", RIGHT, 192);
+	myGLCD.print("       set CO2 to 0ppm!", RIGHT, 204);
+	calibrateCO2();
+	delay(1000);
+	myGLCD.print("                       ", RIGHT, 192);
+	myGLCD.print("                       ", RIGHT, 204);
+	
       } 
     }
   }
