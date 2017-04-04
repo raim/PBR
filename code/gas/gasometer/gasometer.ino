@@ -6,10 +6,9 @@
 
 // RECALIB TOUCHSCREEN (by program UTouch_Calibration_raim
 // raim 20170228 - reset
-/* #define CAL_X 0xFFF7865DUL */
-/* #define CAL_Y 0x01940055UL */
-/* #define CAL_S 0x000EF13FUL */
-#define TOUCH_ORIENTATION  PORTRAIT
+//#define CAL_X 0x0006C659UL
+//#define CAL_Y 0x01A0C07FUL
+//#define CAL_S 0x000EF13FUL
 
 
 // GAS MEASUREMENT MODULE 
@@ -103,8 +102,8 @@ int x, y; // position on touch screen
 
 // record and stop button coordinates
 // TODO: define here
-int rec_x1, rec_x2, rec_y1, rec_y2;
-int stp_x1, stp_x2, stp_y1, stp_y2;
+int rec_x1=10,  rec_x2=150, rec_y1=130, rec_y2=180;
+int stp_x1=160, stp_x2=300, stp_y1=130, stp_y2=180;
 
 /*************************
 **  UTILITY FUNCTIONS   **
@@ -118,36 +117,26 @@ void drawButtons(String left=" STOP ", String right="Calib") {
   // TODO: define x,y positions of buttons as variables
   myGLCD.setBackColor(0, 0, 255);
   myGLCD.setColor(0, 0, 255);
-  myGLCD.fillRoundRect(10, 130, 150, 180);
-  if ( RECORD ) 
-    myGLCD.setColor(255, 0, 0);
-  else 
-    myGLCD.setColor(255, 255, 255);
-  myGLCD.drawRoundRect(10, 130, 150, 180);
-  if ( RECORD ) 
-    myGLCD.print(left, 30, 147);
-  else 
-    myGLCD.print("Record", 30, 147);
+  myGLCD.fillRoundRect(rec_x1, rec_y1, rec_x2, rec_y2);
+  myGLCD.setColor(255, 255, 255);
+  myGLCD.drawRoundRect(rec_x1, rec_y1, rec_x2, rec_y2);
+  myGLCD.print(left, rec_x1+20, rec_y1+17);
 
   myGLCD.setColor(0, 0, 255);
   myGLCD.setBackColor(0, 0, 255);
-  myGLCD.fillRoundRect(160, 130, 300, 180);
+  myGLCD.fillRoundRect(stp_x1, stp_y1, stp_x2, stp_y2);
   myGLCD.setColor(255, 255, 255);
-  myGLCD.drawRoundRect(160, 130, 300, 180);
-  myGLCD.print(right, 190, 147);
+  myGLCD.drawRoundRect(stp_x1, stp_y1, stp_x2, stp_y2);
+  myGLCD.print(right, stp_x1+20, stp_y1+17);
 
-  
   myGLCD.setBackColor (0, 0, 0);
 }
 
 // highlight button frame while a button is touched
 void waitForButton(int x1, int y1, int x2, int y2, double x, double y) {
-  myGLCD.printNumF(x, 3, LEFT, 208);
-  myGLCD.printNumF(y, 3, LEFT, 212);
-  if ( RECORD )
-    myGLCD.setColor(255, 255, 255); // red -> white
-  else
-    myGLCD.setColor(255, 0, 0); // white -> red
+  /* myGLCD.printNumF(x, 3, LEFT, 208); */
+  /* myGLCD.printNumF(y, 3, LEFT, 212); */
+  myGLCD.setColor(255, 0, 0); // white -> red
   myGLCD.drawRoundRect (x1, y1, x2, y2);
   while (myTouch.dataAvailable())
     myTouch.read();
@@ -231,7 +220,7 @@ void setupScreen() {
   myGLCD.InitLCD();
   myGLCD.clrScr();
 
-  myTouch.InitTouch(TOUCH_ORIENTATION);
+  myTouch.InitTouch();
   myTouch.setPrecision(PREC_MEDIUM);
 
   myGLCD.setFont(BigFont);
@@ -239,10 +228,11 @@ void setupScreen() {
 
   
   myGLCD.print("Initializing", CENTER, 32); 
-  myGLCD.print("Touchscreen: PRESS", CENTER, 64);
+  myGLCD.print("Touchscreen", CENTER, 64);
   drawCrossHair(150, 120);
+  // TODO: instead add a calibration routine
   /* drawButtons(); */
-  while (myTouch.dataAvailable() == false) {}
+  /* while (myTouch.dataAvailable() == false) {} */
   // TODO: routines to test or even calibrate touch screen!?
   // NOTE that UTouch_Calibrate_raim ALWAYS works, but currently
   // this code and UTouch_ButtonTest_raim often doesnt!
@@ -254,7 +244,7 @@ void setupScreen() {
   /*     y = myTouch.getY(); */
   /*     if ( (y>=130) && (y<=180) ) { // Button row  */
   /* 	if ( (x>=10) && (x<=150) ) { // Button: Record/Stop */
-  /* 	  waitForButton(10, 130, 150, 180, x, y); */
+  /* 	  waitForButton(rec_x1, rec_y1, rec_x2, rec_y2, x, y); */
   /* 	  OK = true; */
   /* 	} */
   /*     } */
@@ -336,7 +326,7 @@ void setupSDCard() {
 
     // activate record by default !!
     RECORD = true;
-    drawButtons(); // draw buttons in recording mode (red)
+    drawButtons(" STOP ", " Calib"); // draw buttons in recording mode (red)
     myGLCD.setColor(255, 0, 0);
     myGLCD.print("RECORDING", LEFT, 192);
     myGLCD.setBackColor(0, 0, 0);
@@ -392,10 +382,12 @@ void setupCO2() {
 
   // CALIBRATE: set zero point calibration with air
   // TODO: TEMPORARY UNTIL PROPER CALIBRATION PROTOCOL EXISTS
-  Serial2.write("G\r\n"); // G to calibrate to ambient air (440 ppm)
-  delay(dly); 
-  val = Serial2.readStringUntil('\n');
-  Serial.println(val);
+  // do not calibrate here; upon power outage it will
+  // recalib to 440 ppm!
+  /* Serial2.write("G\r\n"); // G to calibrate to ambient air (440 ppm) */
+  /* delay(dly);  */
+  /* val = Serial2.readStringUntil('\n'); */
+  /* Serial.println(val); */
 
   // testing data retrieval: compare string with parsed and multiplied value
   Serial2.write("Z\r\n"); // Z to retrieve filtered CO2 value in ppm
@@ -413,13 +405,50 @@ void setupCO2() {
 
 void calibrateCO2() {
 
+  bool wait=true;
+  int air=false;
+
+  myGLCD.clrScr();
   // calibrating to CO2-free gas, usually nitrogen!
-  Serial2.write("U\r\n"); // G to calibrate to ambient air (440 ppm)
+  // TODO: choose between 0 and air here!
+  myGLCD.print("CALIBRATING CO2", CENTER, 32);
+  myGLCD.print("select current gas:", CENTER, 64);
+  drawButtons("  AIR", "NITROG.");
+  while ( wait ) {
+    if ( myTouch.dataAvailable() ) {
+      delay(50);
+      myTouch.read();
+      x = myTouch.getX();
+      y = myTouch.getY();
+      if ( (y>=rec_y1) && (y<=rec_y2) ) { 
+	if ( (x>=rec_x1) && (x<=rec_x2) ) { // LEFT BUTTON: AIR
+	  waitForButton(rec_x1, rec_y1, rec_x2, rec_y2, x, y);
+	  air = true;
+	  wait=false;
+	}
+	if ( (x>=stp_x1) && (x<=stp_x2) ) { // RIGHT BUTTON: NITROGEN
+	  waitForButton(stp_x1, stp_y1, stp_x2, stp_y2, x, y);
+	  air = false;
+	  wait =false;
+	} 
+      }
+    }
+  }
+ 
+  delay(1000);
+  if ( air ) {
+    Serial2.write("G\r\n"); // G to calibrate to ambient air (440 ppm) */
+  } else {
+    Serial2.write("U\r\n"); // calibrate to 0 ppm (nitrogen)
+  }
+  
   delay(dly); 
   val = Serial2.readStringUntil('\n');
   Serial.println(val);
   myGLCD.print(val, RIGHT, 204);
-
+  delay(1000);
+  myGLCD.print("                       ", RIGHT, 192);
+  myGLCD.print("                       ", RIGHT, 208);
 }
 
 void setupO2() { 
@@ -594,47 +623,37 @@ void loop() {
       myFile.print(T);
       myFile.print('\n');
       myFile.close();
-    } else {
+   } else {
       // if the file didn't open, print an error:
       Serial.println("error opening data.txt");
       myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
-      myGLCD.print("ERROR WRITING FILE", CENTER, 192);
+      myGLCD.print("ERROR WRITING FILE", LEFT, 192);
+      RECORD = false;
     }
-  } else {
-    myGLCD.print("         ", LEFT, 192);
- }
-    
+  } 
+  
   // CHECK BUTTONS
   if ( myTouch.dataAvailable() ) {
     delay(50);
     myTouch.read();
     x = myTouch.getX();
     y = myTouch.getY();
-    if ( (y>=130) && (y<=180) ) { // Button row 
-      if ( (x>=10) && (x<=150) ) { // Button: Record/Stop
-	waitForButton(10, 130, 150, 180, x, y);
+    if ( (y>=rec_y1) && (y<=rec_y2) ) { // Button row 
+      if ( (x>=rec_x1) && (x<=rec_x2) ) { // Button: Record/Stop
+	waitForButton(rec_x1, rec_y1, rec_x2, rec_y2, x, y);
+	// re-draw buttons
 	RECORD = !RECORD;
-	drawButtons(); // re-draw buttons 
-	myGLCD.setColor(255, 0, 0);
-	if ( RECORD )
-	  myGLCD.print("RECORDING", LEFT, 192);
-	else 
-	  myGLCD.print("         ", LEFT, 192);
-	myGLCD.setBackColor(0, 0, 0);
-	myGLCD.setColor(255, 255, 255);
       }
-      if ( (x>=160) && (x<=300) ) { // Button: CALIBRATE
-	waitForButton(160, 130, 300, 180, x, y);
-	myGLCD.print("            CALIBRATING", RIGHT, 192);
-	myGLCD.print("       set CO2 to 0ppm!", RIGHT, 208);
+      if ( (x>=stp_x1) && (x<=stp_x2) ) { // Button: CALIBRATE
+	waitForButton(stp_x1, stp_y1, stp_x2, stp_y2, x, y);
 	calibrateCO2();
-	delay(1000);
-	myGLCD.print("                       ", RIGHT, 192);
-	myGLCD.print("                       ", RIGHT, 208);
-	
       } 
     }
   }
+  if ( RECORD )
+    drawButtons(" STOP ", " Calib"); 
+  else 
+    drawButtons("RECORD", " Calib"); 
   // continue looping
   // TODO: should we time sensor response and functions
   //       and add appropriate delay()s ?
