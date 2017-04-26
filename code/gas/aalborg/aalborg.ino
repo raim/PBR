@@ -70,18 +70,18 @@ boolean avail = false;
 #include "RS485_protocol.h"
 void fWrite (const byte what)
 {
-  Serial3.write (what);  
+  Serial3.write (what);
 }
 
 int fAvailable ()
 {
-  return Serial3.available ();  
+  return Serial3.available ();
 }
 
 int fRead ()
 {
-  return Serial3.read ();  
-} 
+  return Serial3.read ();
+}
 
 // TIME
 time_t t; // time in milliseconds
@@ -465,20 +465,19 @@ void setupMass() {
   digitalWrite(ENABLE_PIN, TRANSMIT);
   delay(500);  
 
-  /* avail = Serial3.available(); */
-  /* Serial.println("# HALLO AALBORG TRANS??"); */
-  /* Serial.println(avail); */
+  avail = Serial3.available();
+  Serial.println("# HALLO AALBORG TRANS??");
+  Serial.println(avail);
   
-  const byte msg[] = "!00,MW,7,12\r";
+  const byte msg[] = "!00,MW,7,11\r\n";
   sendMsg(fWrite, msg, sizeof msg);
 
-  //Serial3.write("!00,MW,7,11\r"); // SET ADDRESS - TODO RM 
+  /* Serial3.write("!00,MW,7,11\r\n"); */ // SET ADDRESS - TODO RM 
   delay(1000);  
   digitalWrite(ENABLE_PIN, RECEIVE);
 
   // set sensor to POLLING MODE 
-  //Serial1.write("M 1\r\n"); // M=0 is streaming mode
-  //val = Serial3.readStringUntil('\n');
+  val = Serial3.readStringUntil('\n');
   Serial.print("# HALLO AALBORG ");
   Serial.println(val);
   
@@ -559,11 +558,11 @@ void loop() {
   myGLCD.print("   SEND TO AALBORG   ", CENTER, 192);
   digitalWrite(ENABLE_PIN, TRANSMIT);
   delay(660);
-  /* avail = Serial3.available(); */
-  /* Serial.print("# HALLO AALBORG TRANS: "); */
-  /* Serial.println(avail); */
-  /* Serial3.write("!11,F\r"); // F for receiving a value */
-  const byte msg[] = "!12,F\r\n";
+  avail = Serial3.available();
+  Serial.print("# HALLO AALBORG TRANS: ");
+  Serial.println(avail);
+  /* Serial3.write("!11,F\r\n"); // F for receiving a value */
+  const byte msg[] = "!11,F\r\n";
   sendMsg(fWrite, msg, sizeof msg);
   delay(1000);  
   digitalWrite(ENABLE_PIN, RECEIVE);
@@ -577,22 +576,24 @@ void loop() {
   Serial.println(avail);
   /* aaval = "make it a very long string in case it just was too short before";//""; */
   /* if ( Serial3.available() ) { */
-  /*   aaval = Serial3.readString(); */
-  /*   Serial.print("# flow rate direct:"); */
-  /*   Serial.print(aaval); */
-  /*   Serial.println("... done"); */
+    /* aaval = Serial3.readStringUntil('\n'); */
+    /* Serial.print("# flow rate direct:"); */
+    /* Serial.print(aaval); */
+    /* Serial.println("... done"); */
   /* } */
-  /* myGLCD.print(aaval, CENTER, 204); */
+  myGLCD.print(aaval, CENTER, 204);
 
-  byte buf [20];
+  byte buf[20];
   byte received = recvMsg (fAvailable, fRead, buf, sizeof buf);
   String myString = String((char *)buf);
-  String myString2 = String((char *)received);
-  Serial.print("# flow rate:"); 
-  Serial.print(myString); 
-  /* Serial.println("... done"); */
-  /* Serial.print(myString2);  */
+  String myString2 = String((char *)received); // should be 0 (fail) or length of received message
+  Serial.print("# flow rate:");
+  Serial.print(myString);
   Serial.println("... done");
+  if  ( received == '0' ) {
+    Serial.println("no value received");
+  }
+  myGLCD.print(myString, CENTER, 192);
 
   // PRINT VALUES TO SCREEN
   myGLCD.print("Time [sec]:          ", LEFT, 16);
