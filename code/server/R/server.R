@@ -48,11 +48,11 @@ dateplot <- function(date, ylim) {
     if ( missing(ylim) ) ylim <- c(0,1)
     plot(date,rep(1,length(date)),ylim=ylim, ylab=NA,axes=FALSE, col=NA,xlab=NA)
     ##axis(2); 
-    mtext("time, h",1,2)
+    mtext("time",1,2)
     axis.POSIXct(1,date,format="%H:%M")
     axis.POSIXct(3, at=midnight,labels=FALSE)
     axis.POSIXct(3, at=noon, format="%b %d",tcl=0)
-    abline(v=as.numeric(midnights),lty=3)
+    abline(v=as.numeric(midnight),lty=3)
     #box()
     legend("topleft",paste(c("start:","end: "),
                            format(c(start,end), "%b %d %H:%M:%S")),bg="#FFFFFF")
