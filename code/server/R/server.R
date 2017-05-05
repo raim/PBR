@@ -1,4 +1,10 @@
 
+
+#' simple moving average based on filter
+mavg <- function (x, n = 5, circular = FALSE)  {
+    stats::filter(x, rep(1/n, n), sides = 2, circular = circular)
+}
+
 #' parse data from arduino modules, space-delimited data tables
 #' where the first column is time in milliseconds and other columns
 #' are measured data; on each power off-on cycle the arduino modules
@@ -38,7 +44,7 @@ stampTime <- function(time, timeStamp, format="%Y%m%d %X") {
 
 #' takes a time object and prepares a plotting canvas
 #' with nice time axes
-dateplot <- function(date, ylim) {
+dateplot <- function(date, ylim, ...) {
 
     start <- head(date,1)
     end <- tail(date,1)
@@ -46,7 +52,7 @@ dateplot <- function(date, ylim) {
     noon <- midnight + 12*3600
 
     if ( missing(ylim) ) ylim <- c(0,1)
-    plot(date,rep(1,length(date)),ylim=ylim, ylab=NA,axes=FALSE, col=NA,xlab=NA)
+    plot(date,rep(1,length(date)),ylim=ylim, ylab=NA,axes=FALSE, col=NA,xlab=NA, ...)
     ##axis(2); 
     mtext("time",1,2)
     axis.POSIXct(1,date,format="%H:%M")
@@ -54,6 +60,6 @@ dateplot <- function(date, ylim) {
     axis.POSIXct(3, at=noon, format="%b %d",tcl=0)
     abline(v=as.numeric(midnight),lty=3)
     #box()
-    legend("topleft",paste(c("start:","end: "),
-                           format(c(start,end), "%b %d %H:%M:%S")),bg="#FFFFFF")
+    #legend("topleft",paste(c("start:","end: "),
+    #                       format(c(start,end), "%b %d %H:%M:%S")),bg="#FFFFFF")
 }
