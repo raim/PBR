@@ -52,9 +52,10 @@ dateplot <- function(date, ylim, ...) {
     noon <- midnight + 12*3600
 
     if ( missing(ylim) ) ylim <- c(0,1)
-    plot(date,rep(1,length(date)),ylim=ylim, ylab=NA,axes=FALSE, col=NA,xlab=NA, ...)
+    plot(date,rep(1,length(date)),ylim=ylim,
+         ylab=NA,axes=FALSE, col=NA,xlab=NA, ...)
     ##axis(2); 
-    mtext("time",1,2)
+    #mtext("time",1,2)
     axis.POSIXct(1,date,format="%H:%M")
     axis.POSIXct(3, at=midnight,labels=FALSE)
     axis.POSIXct(3, at=noon, format="%b %d",tcl=0)
