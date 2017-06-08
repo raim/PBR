@@ -24,6 +24,11 @@ double wght=0;   // weight in gram
 // TODO: add calibration routine as described in README.md of above projects
 Hx711 scale(A9, A8); // scale on analog pins A8 (SCK) and A9 (DT/DOUT)
 
+// CORRECTION FACTOR: calculated for the 5kg scale by adding 10x 500 mL
+// tap water and recording values; see scale_calibration.R
+// TODO: read from SD card!? or allow interactive calibration
+double slope=3.80604399786862; 
+
 // MOTOR: 12V 5000 rpm DC MOTOR/PERISTALTIC PUMP
 // PIN CONNECTIONS - channel A
 const int pwmA = 10;  // motor speed via PWM pin 10 (re-routed from 3!)
@@ -218,8 +223,8 @@ void setup() {
   // TODO: tare routine?
   myGLCD.print("Initializing", CENTER, 32);
   myGLCD.print(" Scale ", CENTER, 64);
-  Serial.print(scale.getGram(), 1);
-  Serial.println(" g");
+  //Serial.print(scale.getGram(), 1);
+  //Serial.println(" g");
   
   //Serial.print("Calibrating scale: ");
   //scale.set_scale();
@@ -235,13 +240,14 @@ void setup() {
 
 void loop() {
 
-  // get weight 
-   Serial.print(scale.getGram(), 1);
- //Serial.print(scale.get_units(10));
-  Serial.println(" g");
+  // print to serial
+  //Serial.print(slope*scale.getGram(), 1);
+  //Serial.print(scale.get_units(10));
+  //Serial.println(" g");
 
   t = millis();
-  wght = scale.getGram();
+  wght = slope*scale.getGram(); // corrected by hard-coded factor slope
+  
   
   // PRINT VALUES TO SCREEN
   myGLCD.print("Time [sec]:          ", LEFT, 16);
@@ -264,7 +270,7 @@ void loop() {
       myFile.close();
     } else {
       // if the file didn't open, print an error:
-      Serial.println("error opening data.txt");
+      //Serial.println("error opening data.txt");
       myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
       myGLCD.print("ERROR WRITING FILE", CENTER, 192);
     }
