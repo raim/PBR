@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper]{scrartcl}
 
+\usepackage{cite}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
@@ -176,6 +177,22 @@ multiple reactors in series.
   \end{minipage}
 \caption[]{\textbf{Gas Measurement Module.}}
 \end{figure}
+
+\clearpage
+\subsection{Light Flux: Light Scatter for Biomass} 
+\label{scatter}
+
+Light scatter can be used as an estimate of cell number and biomass,
+and gives a monotonous signal for OD$>1$ without dilution
+\cite{Hancher1974}. This would allow use as an online measurement
+tool, either in a flow-cell, where culture is pumped through \cite{Hancher1974}. Back-scatter, at 180\textdegree{}, can be used to measure from
+the outside of a transpartent reactor vessel \cite{Ude2014,
+  Bruder2016}. Measurement of scatter at 90\textdegree{} works better
+for low to intermediate cell densities \cite{Ude2014}.
+
+We found a linear relation of 90\textdegree{} scatter for OD1--12,
+at ca. 640 nm, the peak of a red light LED.
+
 
 \clearpage
 \subsection{Light Flux: High-light Panel} 
@@ -414,6 +431,13 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 \item Sainsmart's Arduino Mega + Touchscreen: \obtain{}
 \end{itemize}
 
+
+\clearpage
+\bibliographystyle{unsrt}
+%% for new refs: reset to global tata.bib, run latex/bibtex,
+%% and use `bibexport -o protocol.bib protocol.aux`
+\bibliography{/home/raim/ref/tata}
+%\bibliography{protocol}
 
 
 \end{document}
