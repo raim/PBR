@@ -275,22 +275,32 @@ void loop() {
       myGLCD.print("ERROR WRITING FILE", CENTER, 192);
     }
   }
+
+  /// FIRST EXAMPLE CODE FOR SERIAL COMMUNICATION
   String msg;
   msg = "none";
-  Serial.setTimeout(1000); // 5 seconds time-out
+  Serial.setTimeout(100); // very short 100 ms timeout
   msg = Serial.readStringUntil('\n');
-  if ( msg != "none" ) {
+  if ( msg != "" ) {
       myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
-      myGLCD.print("  RECEIVED MESSAGE   ", CENTER, 192);
+      myGLCD.print("   RECEIVED MESSAGE   ", CENTER, 192);
       myGLCD.print(msg, CENTER, 208);
       if ( msg == "PULL" ) {
 	Serial.write("want my data?\n");
+	myFile = SD.open("data.txt", FILE_READ);
+	while (myFile.available()) {
+	  Serial.write(myFile.read());
+	}
+	myFile.close();
+	SD.remove("data.txt"); 
       }
   } else{
-      myGLCD.print("      no message     ", CENTER, 192);
-    
+      myGLCD.print("                          ", CENTER, 208);
   }
+  myGLCD.setColor(255, 255, 255);
   Serial.setTimeout(1000); // 1 seconds time-out
+  /// END SERIAL TEST
+
   
  // change motor speed
   //Serial.println("fast"); 
