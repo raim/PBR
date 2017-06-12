@@ -275,6 +275,23 @@ void loop() {
       myGLCD.print("ERROR WRITING FILE", CENTER, 192);
     }
   }
+  String msg;
+  msg = "none";
+  Serial.setTimeout(1000); // 5 seconds time-out
+  msg = Serial.readStringUntil('\n');
+  if ( msg != "none" ) {
+      myGLCD.setColor(255, 0, 0);// keep red font until "Stop" button is pressed
+      myGLCD.print("  RECEIVED MESSAGE   ", CENTER, 192);
+      myGLCD.print(msg, CENTER, 208);
+      if ( msg == "PULL" ) {
+	Serial.write("want my data?\n");
+      }
+  } else{
+      myGLCD.print("      no message     ", CENTER, 192);
+    
+  }
+  Serial.setTimeout(1000); // 1 seconds time-out
+  
  // change motor speed
   //Serial.println("fast"); 
   //analogWrite(pwmA, 500);      //Spins the motor on Channel A at full speed
