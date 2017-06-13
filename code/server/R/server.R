@@ -1,4 +1,6 @@
 
+#' remove trailing and leading whitespaces from strings
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 #' simple moving average based on filter
 mavg <- function (x, n = 5, circular = FALSE)  {
