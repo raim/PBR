@@ -184,21 +184,30 @@ multiple reactors in series.
 \label{scatter}
 
 \paragraph{Background.}
-This technique is known as nephelometry.
-Light scatter can be used as an estimate of cell number and biomass,
-and gives a monotonous signal for OD$>1$ without dilution
-\citep{Hancher1974}. This would allow use as an online measurement
-tool, either in a flow-cell, where culture is pumped through \citep{Hancher1974}. Back-scatter, at 180\textdegree{}, can be used to measure from
-the outside of a transpartent reactor vessel \citep{Ude2014,
-  Bruder2016}. Measurement of scatter at 90\textdegree{} works better
-for low to intermediate cell densities \citep{Ude2014}.
+This technique is known as nephelometry.  Light scatter can be used as
+an estimate of cell number and biomass, and gives a monotonous signal
+for OD$>1$ without dilution \citep{Hancher1974}. This would allow use
+as an online measurement tool, either in a flow-cell, where culture is
+pumped through \citep{Hancher1974}. Back-scatter, at 180\textdegree{},
+can be used to measure from the outside of a transpartent reactor
+vessel \citep{Ude2014, Bruder2016}. Measurement of scatter at
+90\textdegree{} works better for low to intermediate cell densities
+\citep{Ude2014}.
+
+A problem is that scatter can not be blanked to empty medium, and the
+value will depend on the light intensity and path, etc. A solution
+would be to express the measured value as a fraction of a standard
+scattering solution. Possible standards are discussed by
+ \cite{Buffone1976}. The commercial solution Ludox may be standardized
+enough for such a purpose.
 
 \paragraph{Preliminary Results.}
 We found a linear relation of 90\textdegree{} scatter for OD 1--12 for
 \textit{E. coli}, at ca. 640 nm the peak of a red light LED.
 
+\includegraphics[width=.4\textwidth]{../data/scatter_test1.pdf}
+
 \paragraph{Plan.}
-This can be 
 
 \paragraph{Ressources:}
 \begin{itemize}
