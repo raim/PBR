@@ -1,6 +1,7 @@
 \documentclass[12pt,a4paper]{scrartcl}
 
-\usepackage{cite}
+%\usepackage{cite}
+\usepackage[authoryear]{natbib}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
@@ -182,17 +183,38 @@ multiple reactors in series.
 \subsection{Light Flux: Light Scatter for Biomass} 
 \label{scatter}
 
+\paragraph{Background.}
+This technique is known as nephelometry.
 Light scatter can be used as an estimate of cell number and biomass,
 and gives a monotonous signal for OD$>1$ without dilution
-\cite{Hancher1974}. This would allow use as an online measurement
-tool, either in a flow-cell, where culture is pumped through \cite{Hancher1974}. Back-scatter, at 180\textdegree{}, can be used to measure from
-the outside of a transpartent reactor vessel \cite{Ude2014,
+\citep{Hancher1974}. This would allow use as an online measurement
+tool, either in a flow-cell, where culture is pumped through \citep{Hancher1974}. Back-scatter, at 180\textdegree{}, can be used to measure from
+the outside of a transpartent reactor vessel \citep{Ude2014,
   Bruder2016}. Measurement of scatter at 90\textdegree{} works better
-for low to intermediate cell densities \cite{Ude2014}.
+for low to intermediate cell densities \citep{Ude2014}.
 
-We found a linear relation of 90\textdegree{} scatter for OD1--12,
-at ca. 640 nm, the peak of a red light LED.
+\paragraph{Preliminary Results.}
+We found a linear relation of 90\textdegree{} scatter for OD 1--12 for
+\textit{E. coli}, at ca. 640 nm the peak of a red light LED.
 
+\paragraph{Plan.}
+This can be 
+
+\paragraph{Ressources:}
+\begin{itemize}
+\item DIY Arduino-based Modules:
+  \begin{itemize}
+  \item \url{https://github.com/ebgoldstein/OpenOBS} is a simple
+    backscatter sensor with LED display, 
+  \item \url{https://hackaday.io/project/12125-pulse-profiling-underwater-light-sensor}
+    is a more involved underwater light- and backscatter sensors
+  \end{itemize}
+\item Commercial Products:
+  \begin{itemize}
+  \item \cite{Ude2014} test a shake flask system for PreSens
+  \item \cite{Bruder2016} test a shake flask system for Aquila Biolabs
+  \end{itemize}
+\end{itemize}
 
 \clearpage
 \subsection{Light Flux: High-light Panel} 
@@ -433,9 +455,9 @@ attach 2--3 pumps; and control \textit{via} arduino/screen
 
 
 \clearpage
-\bibliographystyle{unsrt}
 %% for new refs: reset to global tata.bib, run latex/bibtex,
 %% and use `bibexport -o protocol.bib protocol.aux`
+\bibliographystyle{plainnat}
 \bibliography{/home/raim/ref/tata}
 %\bibliography{protocol}
 
