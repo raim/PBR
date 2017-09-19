@@ -9,6 +9,7 @@
 \usepackage{textcomp}
 \usepackage{subfig}
 \usepackage{amsmath}
+\usepackage{enumerate} % http://ctan.org/pkg/enumerate
 
 \definecolor{steelblue}{rgb}{0.36, 0.54, 0.66}
 
@@ -188,11 +189,11 @@ This technique is known as nephelometry.  Light scatter can be used as
 an estimate of cell number and biomass, and gives a monotonous signal
 for OD$>1$ without dilution \citep{Hancher1974}. This would allow use
 as an online measurement tool, either in a flow-cell, where culture is
-pumped through \citep{Hancher1974}. Back-scatter, at 180\textdegree{},
-can be used to measure from the outside of a transpartent reactor
-vessel \citep{Ude2014, Bruder2016}. Measurement of scatter at
-90\textdegree{} works better for low to intermediate cell densities
-\citep{Ude2014}.
+pumped through \citep{Hancher1974}, or directly through glass wall of
+culture vessels. Back-scatter, at 180\textdegree{}, can be used to
+measure from the outside of a transpartent reactor vessel
+\citep{Ude2014, Bruder2016}. Measurement of scatter at 90\textdegree{}
+works better for low to intermediate cell densities \citep{Ude2014}.
 
 A problem is that scatter can not be blanked to empty medium, and the
 value will depend on the light intensity and path, etc. A solution
@@ -204,16 +205,15 @@ e.g. \href{http://www.sigmaaldrich.com/catalog/product/aldrich/420786}{Sigma Ald
 
 \paragraph{Preliminary Results.}
 We found a linear relation of 90\textdegree{} scatter for OD 1--12 for
-\textit{E. coli}, at ca. 640 nm the peak of a red light LED.
-
+\textit{E. coli}, at ca. 640 nm the peak of a red light LED.\\
 \includegraphics[width=.4\textwidth]{../data/scatter_test1.pdf}
-
-\paragraph{Plan.}
 
 \paragraph{Ressources:}
 \begin{itemize}
+  \setlength\itemsep{0em}
 \item DIY Arduino-based Modules:
   \begin{itemize}
+    \setlength\itemsep{-1em}
   \item \url{https://github.com/ebgoldstein/OpenOBS} is a simple
     backscatter sensor with LED display, 
   \item \url{https://hackaday.io/project/12125-pulse-profiling-underwater-light-sensor}
@@ -221,6 +221,7 @@ We found a linear relation of 90\textdegree{} scatter for OD 1--12 for
   \end{itemize}
 \item Commercial Products:
   \begin{itemize}
+    \setlength\itemsep{-1em}
   \item \cite{Ude2014} test a shake flask system for PreSens
   \item \cite{Bruder2016} test a shake flask system for Aquila Biolabs
   \end{itemize}
@@ -345,9 +346,9 @@ routine
     }
   \end{minipage}
   \begin{minipage}{.5\textwidth}
-  %  \subfloat[Fritzing scheme for the Pump]{
-  %    \includegraphics[width=\textwidth]{figures/pump_fritzing.png}
-  %  }
+    \subfloat[Fritzing scheme for the Pump]{
+      \includegraphics[width=\textwidth]{figures/pump_fritzing.png}
+    }
   \end{minipage}
 \caption[]{\textbf{Continuous Culture Module}. The elecrow scale
   module is based on the HX711 load-cell amplifier (24-bit analog-
