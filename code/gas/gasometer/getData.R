@@ -1,5 +1,5 @@
 
-file <- "offgas.txt" # "DATA.TXT"
+file <- "DATA.TXT" # "offgas.txt" # 
 
 ## time map: mapping arduino time to real time
 timeStamp <- NULL
