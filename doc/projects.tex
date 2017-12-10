@@ -353,8 +353,9 @@ Simple spectrometric measuring tool based on
 
 
 \newpage
-\subsection{Heat Flux: Water Bath Thermostat}
+\subsection{Heat Flux} 
 \label{heat}
+\subsubsection{Water Bath Thermostat}
 
 \paragraph{Project:} build a water bath for growth vessels, control
 T, read-out energy required for maintaining constant T and estimate
@@ -371,6 +372,8 @@ the amount of heat withdrawn or administered
 e.g. \href{http://www.laborhandel24.de/9162625-de?utm_source=google_shopping&gclid=Cj0KEQiA496zBRDoi5OY3p2xmaUBEiQArLNnK6uWkryhjvkNdmRLgcg2W_HIO9W1aKaKCO9gmvlkt_MaAmhe8P8HAQ}{F25-ME}
 \item Arduino and/or Raspberry Pi
 \end{itemize}
+
+
 
 \clearpage
 \subsection{Cell Flux}
@@ -421,7 +424,9 @@ We found a linear relation of 90\textdegree{} scatter for OD 1--12 for
 \end{itemize}
 
 \clearpage
-\subsection{Data Flux: The Server}
+\subsection{Data Flux}
+\label{data}
+\subsubsection{Server}
 \paragraph{Project:} a master software running on a (detachable) linux 
 desktop that synchronizes and speaks via a comon interface to all
 Arduino and Raspberry Pi modules; the modules themselves can interpret
@@ -458,6 +463,17 @@ and interpreted \textit{via} SBML encoded models.
 \item \texttt{act(..., time\_t $t$)}: act (switch on and off, set to a
   specific value), now or at future time $t$
 \end{itemize}
+
+\subsubsection{Processer}
+
+TODO: data processing module based on custom growth models; simply
+reads data from the server's collection folder, and adds new
+data
+
+\subsubsection{Plotter}
+
+TODO: data plotting module, plots raw and processed data in the  
+server's collection folder in R/Rstudio
 
 \newpage
 \section{Project Ideas}
