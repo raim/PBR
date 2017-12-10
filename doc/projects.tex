@@ -66,32 +66,6 @@ All code is at the \href{https://github.com/raim/PBR}{github project}.
 
 %\vspace{-10ex}
 
-\begin{figure}
-\begin{minipage}{.5\textwidth}
-  \begin{equation*}
-    \label{eqn:ancat}
-    \begin{aligned}
-      \frac{\text{d}X}{\text{d}t} &= (\mu_{ab} - \phi) X  \\
-      \frac{\text{d}S}{\text{d}t} &= \phi (S_{in} - S)-(\mu_{ab} + \mu_{cd}) X\\  
-      \frac{\text{d}atp}{\text{d}t} &= (n_{cd} \mu_{cd} - n_{ab} \mu_{ab} - \mu_{m})\frac{C_c}{V_c} - \mu_{ab} atp\\
-      \frac{\text{d}G}{\text{d}t} &= k_La (G_{in}^* - G) - n_{g} \mu_{cd} X\\
-      adp & = a_{tot} - atp
-    \end{aligned}
-  \end{equation*}
-\end{minipage}
-\begin{minipage}{.5\textwidth}
-  \begin{equation*}
-    \begin{aligned}
-      \mu_{ab} &\equiv f(S,atp)\\
-      \mu_{cd} &\equiv f(S,G,adp)\\
-      \mu_m &\equiv f(S,ROS)
-      n_{cd},\,n_{ab} &\equiv f(S) 
-    \end{aligned}
-  \end{equation*}
-\end{minipage}
-\caption{Growth in Continuous Culture: liquid and gas flux equations} 
-\end{figure}
-
 
 \newpage
 \section{PBR Modules}
@@ -101,7 +75,7 @@ All code is at the \href{https://github.com/raim/PBR}{github project}.
 \label{gas}
 
 For measuring gas turnover rates of bio-cultures.
-Code in  \texttt{code/gas/gasometer/} at the \git{}.
+Code in  \texttt{modules/gas/gasometer/} at the \git{}.
 
 \paragraph{Project:} 
 Run co2meter's
@@ -187,7 +161,7 @@ multiple reactors in series.
 \label{cult}
 
 For running cultures in chemostat (continuous culture) or turbidostat modes. 
-Code in  \texttt{code/liquid/} at the \git{}.
+Code in  \texttt{modules/liquid/} at the \git{}.
 
 \paragraph{Project:} build a module consisting of media and waste bottles, 
 a reactor vessel, peristaltic pump(s), and a scale; pump and scale are
@@ -262,8 +236,6 @@ routine
 
 \clearpage
 \subsection{Light Flux}
-
-\clearpage
 \subsubsection{Microplate Illumination} 
 \label{led}
 
@@ -282,15 +254,15 @@ Similar set-ups:
 \item Light-Plate Apparatus: \cite{Gerhardt2016}
 \end{itemize}
 
-Resources:
+\paragraph{Materials:}
 \begin{itemize}
+\item Arduino Nano
 \item Accelerometer: Adafruit MMA8451
 \item LEDs, RGB (WS2812) or just \href{http://www.produktinfo.conrad.com/datenblaetter/175000-199999/180105-da-01-en-LED_0805_TYP_KP_2012SRC_PRV.pdf}{Red LEDs}, ca. 10 Candela
-\item Arduino Nano
-\item Battery?
+\item Transparent OLED screen, perhaps from Frauenhofer institute
+\item Power sources?
 \end{itemize}
 
-\clearpage
 \subsubsection{Bioreactor Illumination}
 
 TODO: LED panels and boxes 
@@ -318,7 +290,7 @@ Simple spectrometric measuring tool based on
 \item
   \href{http://www.avantes.com/images/productsheets/AvaSpec_Mini5.pdf}{AvaSpec-Mini
     data sheet} in \texttt{manuals/light/} at the \git{}
-\item \href{http://www.avantes.com/products/oem/item/220-oem-spectrometers-as5216-microprocessor-board}{The AS5216 microprocessor board} - lib for Rasp. Pi 1 B+ at \texttt{code/light/}
+\item \href{http://www.avantes.com/products/oem/item/220-oem-spectrometers-as5216-microprocessor-board}{The AS5216 microprocessor board} - lib for Rasp. Pi 1 B+ at \texttt{modules/light/}
 \item \href{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4641590/}{Tsuda
     \textit{et al.} PLoS ONE 2015}: 3D printed casing for OD measurement
 \end{itemize}
@@ -402,7 +374,7 @@ e.g. \href{http://www.sigmaaldrich.com/catalog/product/aldrich/420786}{Sigma Ald
 \paragraph{Preliminary Results.}
 We found a linear relation of 90\textdegree{} scatter for OD 1--12 for
 \textit{E. coli}, at ca. 640 nm the peak of a red light LED.\\
-\includegraphics[width=.4\textwidth]{../data/scatter_test1.pdf}
+\includegraphics[width=.4\textwidth]{../modules/plotter/scatter_test1.pdf}
 
 \paragraph{Ressources:}
 \begin{itemize}
@@ -469,6 +441,32 @@ and interpreted \textit{via} SBML encoded models.
 TODO: data processing module based on custom growth models; simply
 reads data from the server's collection folder, and adds new
 data
+
+Growth in continuous culture, liquid and gas flux equations:
+\begin{minipage}{.5\textwidth}
+  \begin{equation*}
+    \label{eqn:ancat}
+    \begin{aligned}
+      \frac{\text{d}X}{\text{d}t} &= (\mu_{ab} - \phi) X  \\
+      \frac{\text{d}S}{\text{d}t} &= \phi (S_{in} - S)-(\mu_{ab} + \mu_{cd}) X\\  
+      \frac{\text{d}atp}{\text{d}t} &= (n_{cd} \mu_{cd} - n_{ab} \mu_{ab} - \mu_{m})\frac{C_c}{V_c} - \mu_{ab} atp\\
+      \frac{\text{d}G}{\text{d}t} &= k_La (G_{in}^* - G) - n_{g} \mu_{cd} X\\
+      adp & = a_{tot} - atp
+    \end{aligned}
+  \end{equation*}
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+  \begin{equation*}
+    \begin{aligned}
+      \mu_{ab} &\equiv f(S,atp)\\
+      \mu_{cd} &\equiv f(S,G,adp)\\
+      \mu_m &\equiv f(S,ROS)
+      n_{cd},\,n_{ab} &\equiv f(S) 
+    \end{aligned}
+  \end{equation*}
+\end{minipage}
+
+
 
 \subsubsection{Plotter}
 
